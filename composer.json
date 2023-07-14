@@ -1,0 +1,19 @@
+{
+    "name": "studiovisual/studio-csp",
+    "type": "wordpress-plugin",
+    "description": "Studio Visual - Plugin CSP",
+    "homepage": "https://studiovisual.com.br",
+    "authors": [
+        {
+          "name": "Studio Visual",
+          "email": "atendimento@studiovisual.com.br",
+          "homepage": "https://github.com/studiovisual/",
+          "role": "Company"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "StudioVisual\\Twitter\\": "app/"
+        }
+    }
+}
