@@ -4,6 +4,7 @@ Esse plugin foi desenvolvido para automatizar postagens no Twitter.
 
 ## Documentações
 [Como obter suas credenciais](https://app.tango.us/app/workflow/Twitter-API---Como-obter-suas-credenciais-934f37ce063747eb9792e34aa5c16fbb)
+
 [Como configurar e postar no twitter](https://app.tango.us/app/workflow/Studio-Visual-for-Twitter-02b79d021bf6450aaecaff4a3965628c)
 
 ## Instalação
