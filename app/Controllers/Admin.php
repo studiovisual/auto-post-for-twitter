@@ -3,9 +3,9 @@
 namespace StudioVisual\Twitter\Controllers;
 
 use StudioVisual\Twitter\App;
+use StudioVisual\Twitter\Models\Logs;
 
 Class Admin {
-
 	public function __construct() {
         // Hook to create admin menu
         add_action('admin_menu', [$this, 'optionsPage']);
@@ -17,7 +17,18 @@ Class Admin {
         add_action('admin_notices', [$this, 'notices']);
 
         // Enqueue Scripts
-        add_action('admin_enqueue_scripts', array($this, 'enqueueAssets'), 100);
+        add_action('admin_enqueue_scripts', [$this, 'enqueueAssets'], 100);
+
+        // Add Meta boxes to Posts
+        add_action('add_meta_boxes', [$this, 'addMetaBoxes']);
+
+        // Save Meta Boxes
+        add_action('save_post', [$this, 'saveMetaBox'], 11);
+
+        // Instance Class
+        $this->logs = new Logs;
+
+        #$this->logs->add(1, 'success', 'testando dajhodjhosa adsadasda');
     }
     
     /**
@@ -55,6 +66,16 @@ Class Admin {
             [$this, 'docs'],
             2,
         );
+
+        add_submenu_page(
+            App::getKey(),
+            'Logs',
+            'Logs',
+            'manage_options',
+            App::getKey('logs_'),
+            [$this, 'logs'],
+            2,
+        );
     }
 
     /**
@@ -70,8 +91,31 @@ Class Admin {
         require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/settings.php';
     }
 
-    public function docs() {
-        echo 'Docs';
+    /**
+    * Docs Page
+    * @return void 
+    */
+    public function docs(): void {
+        $settingsPage = App::getKey();
+        require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/docs.php';
+    }
+
+    /**
+    * Logs Page
+    * @return void 
+    */
+    public function logs(): void {
+        // Clear the logs
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // clear logs
+            $this->logs->truncate();
+        }
+
+        // Get last 30 logs
+        $logs     = $this->logs->get();
+        $current  = App::getKey('logs_');
+
+        require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/logs.php';
     }
 
     /**
@@ -334,6 +378,143 @@ Class Admin {
                 </div>
             <?php
         }
+
+        if(
+            isset( $_GET[ 'page' ] ) 
+            && App::getKey('logs_') == $_GET[ 'page' ]
+            && $_SERVER['REQUEST_METHOD'] === 'POST'
+            && !empty($_POST['clear'])
+        ) {
+            ?>
+                <div class="notice notice-success is-dismissible">
+                    <p>
+                        <strong>Seus logs foram excluídos.</strong>
+                    </p>
+                </div>
+            <?php
+        }
+    }
+
+    /**
+    * Add Meta Boxes
+    * @param string $post_type
+    * @return void
+    */
+    public function addMetaBoxes($post_type): void {
+
+        // Check if plugin is active and post types is checked
+        $settings = self::getSettings();
+
+        if(empty($settings['isActive']) || (!empty($settings['isActive']) && !in_array($post_type, $settings['postTypes']))) {
+            return;
+        }
+
+        add_meta_box(
+            App::getKey(),
+            __(App::$name, App::getKey()), 
+            [$this, 'renderMetaBox'],
+            $post_type,
+            'side',
+            'high'
+        );
+    }
+
+    /**
+    * Renders Meta Box
+    * @param Wp_post $post
+    * @return void 
+    */
+    public function renderMetaBox($post): void {
+        $slug      = App::getSlug();
+
+        // settings to post
+        $default   = in_array($post->post_status, ["future", "draft", "auto-draft", "pending"]) ? 'yes' : 'no';
+        $autoPost  = get_post_meta($post->ID, $slug . '_active', true);
+        $autoPost  = ($autoPost == '' || $autoPost == 'yes') ? $default : 'no';
+
+        // Title settings
+        $title = get_post_meta($post->ID, $slug . '_title', true);
+
+        require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/metabox/post.php';
+    }
+
+    /**
+    * Saves meta box info's 
+    * @param int post_id
+    * @return void|int
+    */
+    public function saveMetaBox(int $post_id) {
+        // Set Slugs
+        $slug          = App::getSlug();
+        $nonce_action  = $slug . '_nonce_action';
+        $nonce_field   = $slug . '_nonce_field';
+        $active        = $slug . '_active';
+        $newTitle      = $slug . '_title';
+
+        // Check if our nonce is set.
+        if(!isset($_POST[$active])) {
+            return $post_id;
+        }
+
+        if(empty($_POST[$nonce_field])) {
+            return $post_id;
+        }
+
+        // Get Nonce from Post
+        $nonce = sanitize_text_field($_POST[$nonce_field]);
+
+        // Verify that the nonce is valid.
+        if(!wp_verify_nonce($nonce, $nonce_action)) {
+            return $post_id;
+        }
+
+        // Skip on auto save
+        if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return $post_id;
+        }
+
+        // Sanitize the user input.
+        $isActive = sanitize_text_field($_POST[$active]);
+        $title    = sanitize_text_field($_POST[$newTitle]);
+
+        // Update the meta field.
+        update_post_meta($post_id, $active, $isActive);
+        update_post_meta($post_id, $newTitle, $title);
+    }
+
+    /**
+    * Get All Settings
+    * @return array
+    */
+    public static function getSettings(): array {
+        $settings = [];
+        $settings['isActive']       = get_option('sv_twitter_api_isactive');
+        $settings['consumerKey']    = get_option('sv_twitter_api_consumerKey');
+        $settings['consumerSecret'] = get_option('sv_twitter_api_consumerSecret');
+        $settings['tokenKey']       = get_option('sv_twitter_api_tokenKey');
+        $settings['tokenSecret']    = get_option('sv_twitter_api_tokenSecret');
+        $settings['categories']     = get_option('sv_twitter_api_categories');
+        $settings['postTypes']      = get_option('sv_twitter_api_posttypes');
+
+        return $settings;
+    }
+
+    /**
+    * Check's for plugin activation 
+    */
+    public static function isActive() {
+
+        if(
+            empty(self::getSettings()['consumerKey']) ||
+            empty(self::getSettings()['consumerSecret']) ||
+            empty(self::getSettings()['tokenKey']) ||
+            empty(self::getSettings()['tokenSecret']) ||
+            empty(self::getSettings()['postTypes'])
+        ) {
+            return false;
+        }
+
+        return !empty(self::getSettings()['isActive']) ? true : false;
     }
 
     /**

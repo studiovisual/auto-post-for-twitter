@@ -1,0 +1,157 @@
+<?php 
+
+namespace StudioVisual\Twitter\Controllers;
+
+use StudioVisual\Twitter\App;
+use StudioVisual\Twitter\Models\Logs;
+use StudioVisual\Twitter\Controllers\Admin;
+use StudioVisual\Twitter\Controllers\ApiTwitter;
+
+Class Publish {
+    protected $logs;
+    protected $options;
+
+    public function __construct() {
+        // Instance dependences
+        $this->logs    = new Logs;
+        $this->twitter = new ApiTwitter;
+        
+        // Add hook only if options is active
+        if(Admin::isActive()) {
+            add_action('future_to_publish', [$this, 'publishFuture']);
+            add_action('save_post',         [$this, 'publishPost'], 10, 2);
+        }
+    }
+
+    /**
+    * Future to Publish Trigger
+    * @param WP_Post $post 
+    */
+    public function publishFuture(\WP_Post $post): void {
+        update_post_meta($post->ID, 'teste', date('d/m/Y H:i:s'));
+        $this->triggerTweet($post);
+    }
+
+    /**
+    *  When post pass to status Publish Triggers autopost
+    * @param int $post
+    * @param WP_Post $post
+    * @return void
+    */
+    public function publishPost(int $post_id, \WP_Post $post) {       
+        // Check if it's not triggered by gutemberg
+        if(strpos($_SERVER['REQUEST_URI'], 'post.php') === false || !$_SERVER['REQUEST_METHOD'] === 'POST') {
+            return;
+        }
+
+        // Only post status publish
+        if($post->post_status !== 'publish') {
+            return;
+        }
+
+        $this->triggerTweet($post);        
+    }
+
+    /**
+    * Abstract function to trigger Tweet
+    * @param WP_Post $post
+    * @return void 
+    */
+    public function triggerTweet(\WP_Post $post): void {
+        // Checks for validations
+        if(!$this->canPublish($post->ID, $post->post_type)) {
+            return;
+        }
+
+        // Setup variables
+        $slug      = App::getSlug();
+        $active    = $slug . '_active';
+        $newTitle  = $slug . '_title';
+        $auto_post = !empty($_POST[$active]) ? $_POST[$active] : get_post_meta($post->ID, $active, true);
+
+        // Check if auto post is ready to publish
+        if ($auto_post == 'yes' || $auto_post == '') {
+            // Format Message
+            $title   = !empty($_POST[$newTitle]) ? $_POST[$newTitle] : get_post_meta($post->ID, $newTitle, true);
+            $title   = !empty($title) ? $title : strip_tags(get_the_title($post->ID));
+            $link    = get_permalink($post->ID);
+            $message = $title . ' ' . $link;
+            
+            // Create Tweet
+            $publish = $this->twitter->createTweet($post->ID, $message);
+
+            if(!empty($publish)) {
+                // Setup Message Log
+                $log = '[' . $post->ID . '] ' . $title . ' | Resposta API: [' . $publish['code'] . '] - ' . $publish['body'];                    
+
+                if($publish['code'] === 201 || $publish['code'] === 200) {
+                    // Success
+                    $this->logs->add($post->ID, 'success', $log);
+
+                    // update meta field to not publish on twitter again
+                    update_post_meta($post->ID, 'twitter_published', true);
+
+                    // Update auto post
+                    $check = update_post_meta($post->ID, $active, 'no');                
+                    $_POST[$active] = 'no';
+
+                    return;
+                }
+
+                // Log error on API
+                $this->logs->add($post->ID, 'failed', $log);
+            }
+        }    
+    }
+
+    /**
+    * Checks any settings blocks for publish on tweet
+    * @param int $post_id
+    * @param string $post_type
+    * @return bool
+    */
+    public function canPublish(int $post_id, string $post_type): bool {
+        
+        if(empty($post_id)) {
+            return false;
+        }
+
+        // Check if Tweet is already published
+        if(!empty(get_post_meta($post_id, 'twitter_published'))) {
+            return false;
+        }
+
+        // Check if Has any categories checked on options and stops publish on twitter
+        $post_categories    = wp_get_post_categories($post_id);
+        $twitter_categories = !empty(Admin::getSettings()['categories']) ? Admin::getSettings()['categories'] : [];
+        $has_categories     = array_intersect($post_categories, $twitter_categories);
+
+        // If there's a blocked categorie skip tweet
+        if(!empty($has_categories)) {
+            // Variable Categories
+            $cats = [];
+
+            // Looks for category name
+            foreach($has_categories as $cat) {
+                $cats[] = get_the_category_by_ID($cat);
+            }
+
+            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | Não enviado por estar em categoria bloqueada | Categoria(s): ' . implode(", ", $cats);
+            $this->logs->add($post_id, 'failed', $log);
+            return false;
+        }
+        
+        // get post type settings and current post type for post
+        $settingsPostTypes = !empty($pt = Admin::getSettings()['postTypes']) ? $pt : [];
+
+        // Checks if post type not in settings
+        if(!in_array($post_type, $settingsPostTypes)) {
+            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | Não enviado por ter Post Type não autorizado | Post Type: ' . $post_type;
+            $this->logs->add($post_id, 'failed', $log);
+            return false;
+        }
+
+        return true;
+    }
+
+}

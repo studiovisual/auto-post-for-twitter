@@ -3,6 +3,7 @@
 namespace StudioVisual\Twitter;
 
 use StudioVisual\Twitter\Controllers\Admin;
+use StudioVisual\Twitter\Controllers\Publish;
 
 Class App {
     // Plugin name
@@ -10,8 +11,9 @@ Class App {
     static $prefix  = 'sv_';
 
     public function __construct() {
-        // Instance Options Page
+        // Instance dependences
         new Admin;
+        new Publish;
     }
     
     /**
@@ -28,14 +30,6 @@ Class App {
     */
     public static function deactivate(): void {
         flush_rewrite_rules();
-    }
-
-    /**
-    * Get options
-    * @return array 
-    */
-    public function getOptions(): array {
-        return !empty($options = get_option('policy-settings')) ? $options : [];
     }
 
     /**
