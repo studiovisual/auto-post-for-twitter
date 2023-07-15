@@ -28,7 +28,7 @@ Class Publish {
     * @param WP_Post $post 
     */
     public function publishFuture(\WP_Post $post): void {
-        update_post_meta($post->ID, 'teste', date('d/m/Y H:i:s'));
+        update_post_meta($post->ID, 'future_post_trigger', date('Y-m-d H:i:s'));
         $this->triggerTweet($post);
     }
 
