@@ -82,11 +82,11 @@ Class Publish {
 
             if(!empty($publish)) {
                 // Setup Message Log
-                $log = '[' . $post->ID . '] ' . $title . ' | Resposta API: [' . $publish['code'] . '] - ' . $publish['body'];                    
+                $log = '[' . $post->ID . '] ' . $title . ' | Response API: [' . $publish['code'] . '] - ' . $publish['body'];                    
 
                 if($publish['code'] === 201 || $publish['code'] === 200) {
                     // Success
-                    $this->logs->add($post->ID, 'success', $log);
+                    $this->logs->add($post->ID, __('sucesso', 'sv-twitter'), $log);
 
                     // update meta field to not publish on twitter again
                     update_post_meta($post->ID, 'twitter_published', true);
@@ -99,7 +99,7 @@ Class Publish {
                 }
 
                 // Log error on API
-                $this->logs->add($post->ID, 'failed', $log);
+                $this->logs->add($post->ID, __('falhou', 'sv-twitter'), $log);
             }
         }    
     }
@@ -136,7 +136,8 @@ Class Publish {
                 $cats[] = get_the_category_by_ID($cat);
             }
 
-            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | Não enviado por estar em categoria bloqueada | Categoria(s): ' . implode(", ", $cats);
+            $message = __('Não enviado por estar em categoria bloqueada | Categoria(s):', 'sv-twitter');
+            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . implode(", ", $cats);
             $this->logs->add($post_id, 'failed', $log);
             return false;
         }
@@ -146,7 +147,8 @@ Class Publish {
 
         // Checks if post type not in settings
         if(!in_array($post_type, $settingsPostTypes)) {
-            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | Não enviado por ter Post Type não autorizado | Post Type: ' . $post_type;
+            $message = __('Não enviado por estar em tipo de post bloqueado | Tipo de post:', 'sv-twitter');
+            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . $post_type;
             $this->logs->add($post_id, 'failed', $log);
             return false;
         }

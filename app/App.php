@@ -7,8 +7,8 @@ use StudioVisual\Twitter\Controllers\Publish;
 
 Class App {
     // Plugin name
-    static $name    = 'Twitter API';
-    static $prefix  = 'sv_';
+    static $name       = 'Twitter API';
+    static $prefix     = 'sv_';
 
     public function __construct() {
         // Instance dependences
