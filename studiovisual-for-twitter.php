@@ -9,7 +9,8 @@ Author:       Studio visual
 Author URI:   https://www.studiovisual.com.br/
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:  studiovisual-for-twitter
+Text Domain:  sv-twitter
+Domain Path:  /languages
 **************************************************************************/
 
 // Exit if accessed directly.
@@ -31,5 +32,10 @@ if(class_exists('StudioVisual\Twitter\App')) {
     register_deactivation_hook( __FILE__, ['StudioVisual\Twitter\App', 'deactivate'] );
 
     // Instance
-    new StudioVisual\Twitter\App;
+    $app = new StudioVisual\Twitter\App;
+
+    // Add location support
+    add_action('plugins_loaded', function() {
+        load_plugin_textdomain( 'sv-twitter', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+    });
 }
