@@ -9,7 +9,6 @@ Class App {
     // Plugin name
     static $name       = 'Twitter API';
     static $prefix     = 'sv_';
-    static $textDomain = 'sv-twitter';
 
     public function __construct() {
         // Instance dependences
@@ -53,6 +52,6 @@ Class App {
     * Load text domain 
     */
     public static function loadTextDomain(string $dir) {
-        load_plugin_textdomain(self::$textDomain, false, $dir . '/languages/');
+        load_plugin_textdomain('sv-twitter', false, $dir . '/languages/');
     }
 }

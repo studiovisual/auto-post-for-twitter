@@ -57,8 +57,8 @@ Class Admin {
 
         add_submenu_page(
             App::getKey(),
-            'Documentação',
-            'Documentação',
+            __('Documentação', 'sv-twitter'),
+            __('Documentação', 'sv-twitter'),
             'manage_options',
             App::getKey('docs_'),
             [$this, 'docs'],
@@ -67,8 +67,8 @@ Class Admin {
 
         add_submenu_page(
             App::getKey(),
-            'Logs',
-            'Logs',
+            __('Logs', 'sv-twitter'),
+            __('Logs', 'sv-twitter'),
             'manage_options',
             App::getKey('logs_'),
             [$this, 'logs'],
@@ -138,7 +138,7 @@ Class Admin {
         register_setting($group, App::getSlug('isActive'));
         add_settings_field(
             App::getSlug('isActive'),
-            'Ativar',
+            __('Ativar', 'sv-twitter'),
             [$this, 'fieldBoolean'],
             $slug,
             App::getSlug('section_id'),
@@ -150,14 +150,14 @@ Class Admin {
         );
         
         // Consumer Key
-        $field_name = 'Consumer Key';
+        $field_name = __('Consumer Key', 'sv-twitter');
         register_setting($group, App::getSlug('consumerKey'), function ($value) use ($field_name) {
             return $this->validationText($value, $field_name); 
         });
 
         add_settings_field(
             App::getSlug('consumerKey'),
-            'Consumer Key',
+            __('Consumer Key', 'sv-twitter'),
             [$this, 'fieldText'],
             $slug,
             App::getSlug('section_id'),
@@ -169,14 +169,14 @@ Class Admin {
         );
 
         // Consumer Secret
-        $field_name = 'Consumer Secret';
+        $field_name = __('Consumer Secret', 'sv-twitter');
         register_setting($group, App::getSlug('consumerSecret'), function ($value) use ($field_name) {
             return $this->validationText($value, $field_name); 
         });
 
         add_settings_field(
             App::getSlug('consumerSecret'),
-            'Consumer Secret',
+            __('Consumer Secret', 'sv-twitter'),
             [$this, 'fieldText'],
             $slug,
             App::getSlug('section_id'),
@@ -188,14 +188,14 @@ Class Admin {
         );
 
         // Token Key
-        $field_name = 'Token Key';
+        $field_name = __('Token Key', 'sv-twitter');
         register_setting($group, App::getSlug('tokenKey'), function ($value) use ($field_name) {
             return $this->validationText($value, $field_name); 
         });
 
         add_settings_field(
             App::getSlug('tokenKey'),
-            'Token Key',
+            __('Token Key', 'sv-twitter'),
             [$this, 'fieldText'],
             $slug,
             App::getSlug('section_id'),
@@ -207,14 +207,14 @@ Class Admin {
         );
 
         // Token Secret
-        $field_name = 'Token Secret';
+        $field_name = __('Token Secret', 'sv-twitter');
         register_setting($group, App::getSlug('tokenSecret'), function ($value) use ($field_name) {
             return $this->validationText($value, $field_name); 
         });
 
         add_settings_field(
             App::getSlug('tokenSecret'),
-            'Token Secret',
+            __('Token Secret', 'sv-twitter'),
             [$this, 'fieldText'],
             $slug,
             App::getSlug('section_id'),
@@ -229,7 +229,7 @@ Class Admin {
         register_setting($group, App::getSlug('postTypes'), [$this, 'validatePostTypes']);
         add_settings_field(
             App::getSlug('postTypes'),
-            'Post Types',
+            __('Tipos de Post', 'sv-twitter'),
             [$this, 'fieldPostType'],
             $slug,
             App::getSlug('section_id'),
@@ -244,7 +244,7 @@ Class Admin {
         register_setting($group, App::getSlug('Categories'));
         add_settings_field(
             App::getSlug('Categories'),
-            'Categorias',
+            __('Categorias', 'sv-twitter'),
             [$this, 'fieldTaxonomy'],
             $slug,
             App::getSlug('section_id'),
@@ -348,7 +348,7 @@ Class Admin {
             add_settings_error(
                 App::getSlug('errors'),
                 'could-not-be-empty',
-                'Você precisa preencher o campo ' . $field_name,
+                __('Você precisa preencher o campo ' . $field_name, 'sv-twitter'),
                 'error'
             );
 
@@ -383,7 +383,7 @@ Class Admin {
             ?>
                 <div class="notice notice-success is-dismissible">
                     <p>
-                        <strong>Suas opções foram salvas.</strong>
+                        <strong><?php echo _e('Suas opções foram salvas.', 'sv-twitter'); ?></strong>
                     </p>
                 </div>
             <?php
@@ -398,7 +398,7 @@ Class Admin {
             ?>
                 <div class="notice notice-success is-dismissible">
                     <p>
-                        <strong>Seus logs foram excluídos.</strong>
+                        <strong><?php echo e_('Seus logs foram excluídos.', 'sv-twitter'); ?></strong>
                     </p>
                 </div>
             <?php
