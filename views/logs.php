@@ -34,7 +34,7 @@
                         <td scope="col" class="manage-column column-post-id">
                             <a href="<?php echo admin_url('post.php?post=' . $log['post_id'] . '&action=edit'); ?>" title="Go to Post"><?php echo $log['post_id']; ?></a>
                         </td>
-                        <td scope="col" class="manage-column column-status"><?php echo $log['status']; ?></td>
+                        <td scope="col" class="manage-column column-status"><?php echo __($log['status'], 'sv-twitter'); ?></td>
                         <td scope="col" class="manage-column column-date"><?php echo date('d/m/Y \a\s H:i:s', strtotime($log['date'])); ?></td>
                         <td scope="col" class="manage-column column-detalhes"><?php echo $log['message']; ?></td>
                     </tr>

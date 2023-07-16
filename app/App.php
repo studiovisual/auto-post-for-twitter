@@ -47,11 +47,4 @@ Class App {
     public static function getSlug(string $key = ''): string {
         return !empty($key) ? strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)) . '_' . $key) : strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)));
     }
-
-    /**
-    * Load text domain 
-    */
-    public static function loadTextDomain(string $dir) {
-        load_plugin_textdomain('sv-twitter', false, $dir . '/languages/');
-    }
 }

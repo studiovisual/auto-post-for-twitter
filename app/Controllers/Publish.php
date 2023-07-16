@@ -86,7 +86,7 @@ Class Publish {
 
                 if($publish['code'] === 201 || $publish['code'] === 200) {
                     // Success
-                    $this->logs->add($post->ID, 'success', $log);
+                    $this->logs->add($post->ID, __('sucesso', 'sv-twitter'), $log);
 
                     // update meta field to not publish on twitter again
                     update_post_meta($post->ID, 'twitter_published', true);
@@ -99,7 +99,7 @@ Class Publish {
                 }
 
                 // Log error on API
-                $this->logs->add($post->ID, 'failed', $log);
+                $this->logs->add($post->ID, __('falhou', 'sv-twitter'), $log);
             }
         }    
     }

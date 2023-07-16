@@ -34,6 +34,8 @@ if(class_exists('StudioVisual\Twitter\App')) {
     // Instance
     $app = new StudioVisual\Twitter\App;
 
-    // Load location
-    $app->loadTextDomain(dirname(plugin_basename(__FILE__)));
+    // Add location support
+    add_action('plugins_loaded', function() {
+        load_plugin_textdomain( 'sv-twitter', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+    });
 }
