@@ -2,8 +2,8 @@
     <div class="sv-inputs isActive">
         <label for="<?php echo $slug; ?>_active"><?php echo _e('Publicar no Twitter?', 'sv-twitter'); ?></label>
         <select name="<?php echo $slug; ?>_active">
-            <option value="yes" <?php selected($autoPost, 'yes'); ?>><?php echo e_('Sim', 'sv-twitter'); ?></option>
-            <option value="no" <?php selected($autoPost, 'no'); ?>><?php echo e_('Não', 'sv-twitter'); ?></option>
+            <option value="yes" <?php selected($autoPost, 'yes'); ?>><?php echo _e('Sim', 'sv-twitter'); ?></option>
+            <option value="no" <?php selected($autoPost, 'no'); ?>><?php echo _e('Não', 'sv-twitter'); ?></option>
         </select>
     </div>
 
