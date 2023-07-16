@@ -398,7 +398,7 @@ Class Admin {
             ?>
                 <div class="notice notice-success is-dismissible">
                     <p>
-                        <strong><?php echo e_('Seus logs foram excluídos.', 'sv-twitter'); ?></strong>
+                        <strong><?php echo _e('Seus logs foram excluídos.', 'sv-twitter'); ?></strong>
                     </p>
                 </div>
             <?php
