@@ -4,7 +4,7 @@
 Plugin Name:  Studio Visual for Twitter
 Plugin URI:   https://github.com/studiovisual/studiovisual-for-twitter
 Description:  Publique automaticamente no Twitter ao publicar um novo post no WordPress.
-Version:      1.0.1
+Version:      1.1.0
 Author:       Studio visual
 Author URI:   https://www.studiovisual.com.br/
 License: GPL2
