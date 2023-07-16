@@ -27,8 +27,6 @@ Class Admin {
 
         // Instance Class
         $this->logs = new Logs;
-
-        #$this->logs->add(1, 'success', 'testando dajhodjhosa adsadasda');
     }
     
     /**
@@ -137,7 +135,7 @@ Class Admin {
         );
     
         // Is Active
-        register_setting($group, App::getSlug('isActive'), [$this, 'sanitizeCheckbox']);
+        register_setting($group, App::getSlug('isActive'));
         add_settings_field(
             App::getSlug('isActive'),
             'Ativar',
@@ -152,7 +150,11 @@ Class Admin {
         );
         
         // Consumer Key
-        register_setting($group, App::getSlug('consumerKey'), [$this, 'validationText']);
+        $field_name = 'Consumer Key';
+        register_setting($group, App::getSlug('consumerKey'), function ($value) use ($field_name) {
+            return $this->validationText($value, $field_name); 
+        });
+
         add_settings_field(
             App::getSlug('consumerKey'),
             'Consumer Key',
@@ -167,7 +169,11 @@ Class Admin {
         );
 
         // Consumer Secret
-        register_setting($group, App::getSlug('consumerSecret'), [$this, 'validationText']);
+        $field_name = 'Consumer Secret';
+        register_setting($group, App::getSlug('consumerSecret'), function ($value) use ($field_name) {
+            return $this->validationText($value, $field_name); 
+        });
+
         add_settings_field(
             App::getSlug('consumerSecret'),
             'Consumer Secret',
@@ -182,7 +188,11 @@ Class Admin {
         );
 
         // Token Key
-        register_setting($group, App::getSlug('tokenKey'), [$this, 'validationText']);
+        $field_name = 'Token Key';
+        register_setting($group, App::getSlug('tokenKey'), function ($value) use ($field_name) {
+            return $this->validationText($value, $field_name); 
+        });
+
         add_settings_field(
             App::getSlug('tokenKey'),
             'Token Key',
@@ -197,7 +207,11 @@ Class Admin {
         );
 
         // Token Secret
-        register_setting($group, App::getSlug('tokenSecret'), [$this, 'validationText']);
+        $field_name = 'Token Secret';
+        register_setting($group, App::getSlug('tokenSecret'), function ($value) use ($field_name) {
+            return $this->validationText($value, $field_name); 
+        });
+
         add_settings_field(
             App::getSlug('tokenSecret'),
             'Token Secret',
@@ -289,17 +303,8 @@ Class Admin {
     function fieldBoolean(array $args): void {
         $value = get_option($args['name']);
         ?>
-            <input type="checkbox" name="<?php echo $args['name']; ?>" id="<?php echo $args['name']; ?>" <?php checked($value, true) ?> />
+            <input type="checkbox" name="<?php echo $args['name']; ?>" id="<?php echo $args['name']; ?>" value="on" <?php checked($value, 'on') ?> />
         <?php
-    }
-    
-    /**
-    * Sanitizes checkbox values
-    * @param $value
-    * @return bool
-    */
-    public function sanitizeCheckbox($value): bool {
-        return 'on' === $value ? true : false;
     }
 
     /**
@@ -320,6 +325,8 @@ Class Admin {
 
             // Disable active for plugin
             update_option(App::getSlug('isActive'), false);
+
+            return false;
         }
 
         return $value;
@@ -328,9 +335,10 @@ Class Admin {
     /**
     * Validations and Sanitize
     * @param string $value
+    * @param string $field_name
     * @return string 
     */
-    public function validationText(string $value): string {
+    public function validationText(string $value, string $field_name) {
         // Sanitize Text
         $value = sanitize_text_field($value);
 
@@ -340,12 +348,14 @@ Class Admin {
             add_settings_error(
                 App::getSlug('errors'),
                 'could-not-be-empty',
-                'Verifique o preenchimento correto dos campos',
+                'Você precisa preencher o campo ' . $field_name,
                 'error'
             );
 
             // Disable active for plugin
             update_option(App::getSlug('isActive'), false);
+
+            return false;
         }
 
         return $value;
