@@ -7,8 +7,9 @@ use StudioVisual\Twitter\Controllers\Publish;
 
 Class App {
     // Plugin name
-    static $name    = 'Twitter API';
-    static $prefix  = 'sv_';
+    static $name       = 'Twitter API';
+    static $prefix     = 'sv_';
+    static $textDomain = 'sv-twitter';
 
     public function __construct() {
         // Instance dependences
@@ -46,5 +47,12 @@ Class App {
     */
     public static function getSlug(string $key = ''): string {
         return !empty($key) ? strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)) . '_' . $key) : strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)));
+    }
+
+    /**
+    * Load text domain 
+    */
+    public static function loadTextDomain(string $dir) {
+        load_plugin_textdomain(self::$textDomain, false, $dir . '/languages/');
     }
 }
