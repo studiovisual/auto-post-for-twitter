@@ -4,7 +4,7 @@
 Plugin Name:  WP Auto Tweet
 Plugin URI:   https://github.com/studiovisual/wp-auto-tweet
 Description:  Automatically post on Twitter when publishing a new post on WordPress.
-Version:      1.1.0
+Version:      1.1.1
 Author:       Studio visual
 Author URI:   https://www.studiovisual.com.br/
 License: GPL2
@@ -23,7 +23,7 @@ require __DIR__.'/vendor/autoload.php';
 
 if(class_exists('StudioVisual\Twitter\App')) {
     // Define Constants
-    define( 'STUDIO_TWITTER_VERSION', '1.1.0' );
+    define( 'STUDIO_TWITTER_VERSION', '1.1.1' );
     define( 'STUDIO_TWITTER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
     define( 'STUDIO_TWITTER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
