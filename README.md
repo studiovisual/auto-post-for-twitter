@@ -3,8 +3,8 @@
 This plugin was developed to automate posts on Twitter.
 
 ## Documentation
-- [How to get your credentials](https://app.tango.us/app/workflow/Twitter-API---Como-obter-suas-credenciais-934f37ce063747eb9792e34aa5c16fbb)
-- [How to setup and post on Twitter](https://app.tango.us/app/workflow/Setup-WP-Auto-Tweet-b9e319d6bef8484e8249e9042188a2ab)
+- [How to get your credentials] [COMING SOON]
+- [How to setup and post on Twitter] [COMING SOON]
 
 ## Installation
 Follow the steps below to install and activate the plugin:
