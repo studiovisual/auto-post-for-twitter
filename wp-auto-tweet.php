@@ -3,7 +3,7 @@
 /***************************************************************************
 Plugin Name:  WP Auto Tweet
 Plugin URI:   https://github.com/studiovisual/wp-auto-tweet
-Description:  Publique automaticamente no Twitter ao publicar um novo post no WordPress.
+Description:  Automatically post on Twitter when publishing a new post on WordPress.
 Version:      1.1.0
 Author:       Studio visual
 Author URI:   https://www.studiovisual.com.br/
