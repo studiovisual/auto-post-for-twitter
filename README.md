@@ -1,32 +1,31 @@
-# Postagens automáticas no Twitter
+# Automatic Twitter Posts
 
-Esse plugin foi desenvolvido para automatizar postagens no Twitter.
+This plugin was developed to automate posts on Twitter.
 
-## Documentações
-- [Como obter suas credenciais](https://app.tango.us/app/workflow/Twitter-API---Como-obter-suas-credenciais-934f37ce063747eb9792e34aa5c16fbb)
-- [Como configurar e postar no twitter](https://app.tango.us/app/workflow/Studio-Visual-for-Twitter-02b79d021bf6450aaecaff4a3965628c)
+## Documentation
+- [How to get your credentials](https://app.tango.us/app/workflow/Twitter-API---Como-obter-suas-credenciais-934f37ce063747eb9792e34aa5c16fbb)
+- [How to setup and post on Twitter](https://app.tango.us/app/workflow/Studio-Visual-for-Twitter-02b79d021bf6450aaecaff4a3965628c)
 
-## Instalação
-Siga as etapas abaixo para instalar e ativar o plugin:
+## Installation
+Follow the steps below to install and activate the plugin:
 
-### Opção 1
+### Option 1
 `composer require studiovisual/studiovisual-for-twitter`
 
-### Opção 2
-1. Clone o repositório na pasta `wp-content/plugins`.
-2. Execute o comando `composer install`.
-3. Ative o plugin no painel administrativo do WordPress.
+### Option 2
+1. Clone the repository in the `wp-content/plugins` folder.
+2. Run the command `composer install`.
+3. Activate the plugin from the WordPress admin panel.
 
-## Configurações
+## Configuration
 
-Será necessário uma Api Key do Twitter, caso não possua as chaves para utilizar o plugin,
-Leia a documentação do plugin acessando Twitter API -> Documentação.
+You will need a Twitter API Key. If you don't have the keys to use the plugin,
+read the plugin documentation by accessing Twitter API -> Documentation.
 
-1. Habilite o plugin na opção **ativar**
-2. Adicione suas chaves de API
-3. Escolha os Post Types que deverão ser publicados (escolha ao menos 1)~
-4. Caso necessário escolha categorias que deveriam ser excluídas das postagens automaticas.
+1. Enable the plugin in the **activate** option
+2. Add your API keys
+3. Choose the Post Types that should be published (choose at least 1)
+4. If necessary, select categories that should be excluded from automatic posts.
 
-Pronto!
-Agora todas suas novas postagens serão publicadas automaticamente no Twitter
-
+Done!
+Now all your new posts will be automatically published on Twitter
