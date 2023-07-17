@@ -1,9 +1,9 @@
 <?php 
 
 /***************************************************************************
-Plugin Name:  Studio Visual for Twitter
-Plugin URI:   https://github.com/studiovisual/studiovisual-for-twitter
-Description:  Publique automaticamente no Twitter ao publicar um novo post no WordPress.
+Plugin Name:  WP Auto Tweet
+Plugin URI:   https://github.com/studiovisual/wp-auto-tweet
+Description:  Automatically post on Twitter when publishing a new post on WordPress.
 Version:      1.1.0
 Author:       Studio visual
 Author URI:   https://www.studiovisual.com.br/
@@ -23,7 +23,7 @@ require __DIR__.'/vendor/autoload.php';
 
 if(class_exists('StudioVisual\Twitter\App')) {
     // Define Constants
-    define( 'STUDIO_TWITTER_VERSION', '1.0.0' );
+    define( 'STUDIO_TWITTER_VERSION', '1.1.0' );
     define( 'STUDIO_TWITTER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
     define( 'STUDIO_TWITTER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
