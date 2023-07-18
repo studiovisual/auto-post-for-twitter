@@ -11,10 +11,7 @@ class Logs {
         global $wpdb;
 
         // Get slugified name from plugin
-        $this->table = $wpdb->prefix . App::getSlug(); 
-
-        // create table
-        $this->createTable();
+        $this->table = $wpdb->prefix . App::getSlug('logs'); 
     }
 
     /**
@@ -43,9 +40,22 @@ class Logs {
             if(!$create) {
                 return false;
             }
+
+            // Add version
+            add_option(App::getSlug('dbversion'), STUDIO_TWITTER_VERSION);
         }
 
         return true;
+    }
+
+    /**
+    * Drop Table
+    * @return bool 
+    */
+    public function drop(): bool {
+        global $wpdb;
+
+        return $wpdb->query('DROP TABLE IF EXISTS ' . $this->table);
     }
 
     /**

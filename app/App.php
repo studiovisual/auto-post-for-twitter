@@ -4,16 +4,17 @@ namespace StudioVisual\Twitter;
 
 use StudioVisual\Twitter\Controllers\Admin;
 use StudioVisual\Twitter\Controllers\Publish;
+use StudioVisual\Twitter\Models\Logs;
 
 Class App {
-    // Plugin name
-    static $name       = 'Twitter API';
-    static $prefix     = 'sv_';
+    // Variables
+    static $name   = 'Twitter API';
+    static $prefix = 'sv_';
 
     public function __construct() {
         // Instance dependences
         new Admin;
-        new Publish;
+        new Publish;        
     }
     
     /**
@@ -22,6 +23,10 @@ Class App {
     */
     public static function activate(): void {
         update_option('rewrite_rules', '');
+
+        // Create Table Logs
+        $logs = new Logs;
+        $logs->createTable();
     }
 
     /**
@@ -30,6 +35,26 @@ Class App {
     */
     public static function deactivate(): void {
         flush_rewrite_rules();
+    }
+
+    /**
+    * Uninstall plugin
+    * @return void 
+    */
+    public static function uninstall(): void {
+        // Remove options
+        delete_option(self::getSlug('isactive'));
+        delete_option(self::getSlug('consumerkey'));
+        delete_option(self::getSlug('consumersecret'));
+        delete_option(self::getSlug('tokenkey'));
+        delete_option(self::getSlug('tokensecret'));
+        delete_option(self::getSlug('posttypes'));
+        delete_option(self::getSlug('categories'));
+        delete_option(self::getSlug('dbversion'));
+
+        // Drop table
+        $logs = new Logs;
+        $logs->drop();
     }
 
     /**
