@@ -498,13 +498,13 @@ Class Admin {
     */
     public static function getSettings(): array {
         $settings = [];
-        $settings['isActive']       = get_option('sv_twitter_api_isactive');
-        $settings['consumerKey']    = get_option('sv_twitter_api_consumerKey');
-        $settings['consumerSecret'] = get_option('sv_twitter_api_consumerSecret');
-        $settings['tokenKey']       = get_option('sv_twitter_api_tokenKey');
-        $settings['tokenSecret']    = get_option('sv_twitter_api_tokenSecret');
-        $settings['categories']     = get_option('sv_twitter_api_categories');
-        $settings['postTypes']      = get_option('sv_twitter_api_posttypes');
+        $settings['isActive']       = get_option(App::getSlug('isactive'));
+        $settings['consumerKey']    = get_option(App::getSlug('consumerKey'));
+        $settings['consumerSecret'] = get_option(App::getSlug('consumerSecret'));
+        $settings['tokenKey']       = get_option(App::getSlug('tokenKey'));
+        $settings['tokenSecret']    = get_option(App::getSlug('tokenSecret'));
+        $settings['categories']     = get_option(App::getSlug('categories'));
+        $settings['postTypes']      = get_option(App::getSlug('posttypes'));
 
         return $settings;
     }
