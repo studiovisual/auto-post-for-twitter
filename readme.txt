@@ -26,12 +26,11 @@ The WP Auto Tweet publish your posts automatically from your site to Twitter. Yo
 
 WP Auto Tweet is developed and maintained by [Studio Visual](https://studiovisual.com.br/ "studiovisual.com.br").
 
-★ [WP Auto Tweet User Guide](http://{LINK GUIA}/ "WP Auto Tweet User Guide")
+★ [WP Auto Tweet User Guide](https://studiovisual.com.br/plugins-wordpress/wp-auto-tweet/ "WP Auto Tweet User Guide")
 
 == Installation ==
 
-★ [WP Twitter Auto Publish User Guide]({INSTALLATION} "WP Twitter Auto Publish User Guide")
-★ [WP Twitter Auto Publish FAQ]({FAQ} "WP Twitter Auto Publish FAQ")
+★ [WP Twitter Auto Publish User Guide](https://studiovisual.com.br/plugins-wordpress/wp-auto-tweet/ "WP Auto TWeet User Guide")
 
 1. Extract `wp-auto-tweet.zip` to your `/wp-content/plugins/` directory.
 2. In the admin panel under plugins activate WP Auto Tweet.
@@ -50,7 +49,7 @@ You can specify the categories which you want to exclude from auto publish from 
 
 = 3. Could a post be publish more than one time ? =
 
-No, current the plugin blocks to send the same post more than once.
+No, Wp Auto Tweet blocks to send the same post more than once.
 
 == Screenshots ==
 
@@ -72,6 +71,5 @@ First official launch.
 = Troubleshooting =
 
 = Requirements =
-
     WordPress 3.0+
     PHP 7.4+
