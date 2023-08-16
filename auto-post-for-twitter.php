@@ -1,8 +1,8 @@
 <?php 
 
 /***************************************************************************
-Plugin Name:  WP Auto Tweet
-Plugin URI:   https://github.com/studiovisual/wp-auto-tweet
+Plugin Name:  Auto Post for Twitter
+Plugin URI:   https://github.com/studiovisual/auto-post-for-twitter
 Description:  Automatically post on Twitter when publishing a new post on WordPress.
 Version:      1.0.0
 Author:       Studio visual

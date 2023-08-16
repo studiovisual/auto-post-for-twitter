@@ -1,4 +1,4 @@
-=== WP Auto Tweet ===
+=== Auto Post for Twitter ===
 Contributors: studiovisual
 Donate link: https://studiovisual.com.br/
 Tags:  twitter, wp twitter auto publish, twitter auto publish, publish post to twitter, add link to twitter, twitter publishing, post to twitter, social media auto publish, social media publishing, social network auto publish, social media, social network
@@ -18,30 +18,30 @@ Publish posts automatically to Twitter.
 ★ Change title's on your Tweet directly on your post page
 ★ Add easily your keys
 
-= WP Auto Tweet in details =
+= Auto Post for Twitter in details =
 
-The WP Auto Tweet publish your posts automatically from your site to Twitter. You can publish your posts to Twitter and change the title that will to twitter easily. The plugin supports exclude categories and select any post type registered.
+The Auto Post for Twitter publish your posts automatically from your site to Twitter. You can publish your posts to Twitter and change the title that will to twitter easily. The plugin supports exclude categories and select any post type registered.
 
 = About =
 
-WP Auto Tweet is developed and maintained by [Studio Visual](https://studiovisual.com.br/ "studiovisual.com.br").
+Auto Post for Twitter is developed and maintained by [Studio Visual](https://studiovisual.com.br/ "studiovisual.com.br").
 
-★ [WP Auto Tweet User Guide](https://studiovisual.com.br/plugins-wordpress/wp-auto-tweet/ "WP Auto Tweet User Guide")
+★ [Auto Post for Twitter User Guide](https://studiovisual.com.br/plugins-wordpress/auto-post-for-twitter/ "Auto Post for Twitter User Guide")
 
 == Installation ==
 
-★ [WP Twitter Auto Publish User Guide](https://studiovisual.com.br/plugins-wordpress/wp-auto-tweet/ "WP Auto TWeet User Guide")
+★ [WP Twitter Auto Publish User Guide](https://studiovisual.com.br/plugins-wordpress/auto-post-for-twitter/ "Auto Post for Twitter User Guide")
 
-1. Extract `wp-auto-tweet.zip` to your `/wp-content/plugins/` directory.
-2. In the admin panel under plugins activate WP Auto Tweet.
-3. You can configure the settings from WP Auto Tweet menu.
+1. Extract `auto-post-for-twitter.zip` to your `/wp-content/plugins/` directory.
+2. In the admin panel under plugins activate Auto Post for Twitter.
+3. You can configure the settings from Auto Post for Twitter menu.
 4. Once these are done, posts should get automatically published based on your filter settings.
 
 == Frequently Asked Questions ==
 
-= 1. The WP Auto Tweet is not working properly. =
+= 1. The Auto Post for Twitter is not working properly. =
 
-Please check the wordpress version you are using. Make sure it meets the minimum version recommended by us. Make sure all files of the `wp auto tweet` plugin are uploaded to the folder `wp-content/plugins/`
+Please check the wordpress version you are using. Make sure it meets the minimum version recommended by us. Make sure all files of the `Auto Post for Twitter` plugin are uploaded to the folder `wp-content/plugins/`
 
 = 2. How do I restrict auto publish to certain categories ? =
 
@@ -49,7 +49,7 @@ You can specify the categories which you want to exclude from auto publish from 
 
 = 3. Could a post be publish more than one time ? =
 
-No, Wp Auto Tweet blocks to send the same post more than once.
+No, Auto Post for Twitter blocks to send the same post more than once.
 
 == Screenshots ==
 
@@ -60,12 +60,12 @@ No, Wp Auto Tweet blocks to send the same post more than once.
 
 == Upgrade Notice ==
 
-= WP Auto Tweet 1.0 =
+= Auto Post for Twitter 1.0 =
 First official launch.
 
 == Changelog ==
 
-= WP Auto Tweet 1.0 =
+= Auto Post for Twitter 1.0 =
 First official launch.
 
 = Troubleshooting =

@@ -8,7 +8,7 @@ use StudioVisual\Twitter\Models\Logs;
 
 Class App {
     // Variables
-    static $name   = 'WP Auto Tweet';
+    static $name   = 'Auto Post for Twitter';
     static $prefix = 'sv_';
 
     public function __construct() {
