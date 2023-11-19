@@ -21,7 +21,7 @@ Class Autotwitter_App {
     * Activate plugin
     * @return void
     */
-    public static function activate(): void {
+    public static function autotwitter_activate(): void {
         update_option('rewrite_rules', '');
 
         // Create Table Logs
@@ -33,7 +33,7 @@ Class Autotwitter_App {
     * Deactivate plugin
     * @return void
     */
-    public static function deactivate(): void {
+    public static function autotwitter_deactivate(): void {
         flush_rewrite_rules();
     }
 
@@ -41,7 +41,7 @@ Class Autotwitter_App {
     * Uninstall plugin
     * @return void
     */
-    public static function uninstall(): void {
+    public static function autotwitter_uninstall(): void {
         // Remove options
         delete_option(self::getSlug('isactive'));
         delete_option(self::getSlug('consumerkey'));
