@@ -5,7 +5,7 @@ namespace StudioVisual\Twitter\Controllers;
 use StudioVisual\Twitter\Autotwitter_App;
 use StudioVisual\Twitter\Models\Autotwitter_Logs;
 use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
-use StudioVisual\Twitter\Controllers\ApiTwitter;
+use StudioVisual\Twitter\Controllers\Autotwitter_ApiTwitter;
 
 Class Autotwitter_Publish {
     protected $logs;
