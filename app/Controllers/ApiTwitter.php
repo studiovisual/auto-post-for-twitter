@@ -70,11 +70,11 @@ class ApiTwitter {
 
         // Combine the OAuth parameters with the request parameters
         $allParams = array_merge($params, array(
-            'oauth_consumer_key'     => Autotwitter_Admin::getSettings()['consumerKey'],
+            'oauth_consumer_key'     => Autotwitter_Admin::autotwitter_getSettings()['consumerKey'],
             'oauth_nonce'            => $nonce,
             'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_timestamp'        => $timestamp,
-            'oauth_token'            => Autotwitter_Admin::getSettings()['tokenKey'],
+            'oauth_token'            => Autotwitter_Admin::autotwitter_getSettings()['tokenKey'],
             'oauth_version'          => '1.0',
         ));
 
@@ -89,15 +89,15 @@ class ApiTwitter {
         $baseString          = $encodedMethod . '&' . $encodedUrl . '&' . $encodedParamsString;
 
         // Generate the signing key
-        $encodedConsumerSecret = rawurlencode(Autotwitter_Admin::getSettings()['consumerSecret']);
-        $encodedTokenSecret    = rawurlencode(Autotwitter_Admin::getSettings()['tokenSecret']);
+        $encodedConsumerSecret = rawurlencode(Autotwitter_Admin::autotwitter_getSettings()['consumerSecret']);
+        $encodedTokenSecret    = rawurlencode(Autotwitter_Admin::autotwitter_getSettings()['tokenSecret']);
         $signingKey            = $encodedConsumerSecret . '&' . $encodedTokenSecret;
 
         // Calculate the HMAC-SHA1 signature
         $signature        = base64_encode(hash_hmac('sha1', $baseString, $signingKey, true));
         $encodedSignature = rawurlencode($signature);
 
-        return $this->getAuthorization($method, $url, Autotwitter_Admin::getSettings()['consumerKey'], $nonce, $encodedSignature, $timestamp, Autotwitter_Admin::getSettings()['tokenKey']);
+        return $this->getAuthorization($method, $url, Autotwitter_Admin::autotwitter_getSettings()['consumerKey'], $nonce, $encodedSignature, $timestamp, Autotwitter_Admin::autotwitter_getSettings()['tokenKey']);
     }
 
     /**
