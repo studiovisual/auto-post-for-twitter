@@ -64,7 +64,7 @@ Class Autotwitter_Publish {
         }
 
         // Setup variables
-        $slug      = Autotwitter_App::getSlug();
+        $slug      = Autotwitter_App::autotwitter_getSlug();
         $active    = $slug . '_active';
         $newTitle  = $slug . '_title';
         $auto_post = !empty($_POST[$active]) ? $_POST[$active] : get_post_meta($post->ID, $active, true);

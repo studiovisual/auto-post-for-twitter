@@ -43,14 +43,14 @@ Class Autotwitter_App {
     */
     public static function autotwitter_uninstall(): void {
         // Remove options
-        delete_option(self::getSlug('isactive'));
-        delete_option(self::getSlug('consumerkey'));
-        delete_option(self::getSlug('consumersecret'));
-        delete_option(self::getSlug('tokenkey'));
-        delete_option(self::getSlug('tokensecret'));
-        delete_option(self::getSlug('posttypes'));
-        delete_option(self::getSlug('categories'));
-        delete_option(self::getSlug('dbversion'));
+        delete_option(self::autotwitter_getSlug('isactive'));
+        delete_option(self::autotwitter_getSlug('consumerkey'));
+        delete_option(self::autotwitter_getSlug('consumersecret'));
+        delete_option(self::autotwitter_getSlug('tokenkey'));
+        delete_option(self::autotwitter_getSlug('tokensecret'));
+        delete_option(self::autotwitter_getSlug('posttypes'));
+        delete_option(self::autotwitter_getSlug('categories'));
+        delete_option(self::autotwitter_getSlug('dbversion'));
 
         // Drop table
         $logs = new Autotwitter_Logs;
@@ -69,7 +69,7 @@ Class Autotwitter_App {
     * Format key to save options
     * @return string
     */
-    public static function getSlug(string $key = ''): string {
+    public static function autotwitter_getSlug(string $key = ''): string {
         return !empty($key) ? strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)) . '_' . $key) : strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)));
     }
 }

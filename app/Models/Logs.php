@@ -11,7 +11,7 @@ class Autotwitter_Logs {
         global $wpdb;
 
         // Get slugified name from plugin
-        $this->table = $wpdb->prefix . Autotwitter_App::getSlug('logs');
+        $this->table = $wpdb->prefix . Autotwitter_App::autotwitter_getSlug('logs');
     }
 
     /**
@@ -42,7 +42,7 @@ class Autotwitter_Logs {
             }
 
             // Add version
-            add_option(Autotwitter_App::getSlug('dbversion'), STUDIO_TWITTER_VERSION);
+            add_option(Autotwitter_App::autotwitter_getSlug('dbversion'), STUDIO_TWITTER_VERSION);
         }
 
         return true;
