@@ -28,9 +28,9 @@ if(class_exists('StudioVisual\Twitter\Autotwitter_App')) {
     define( 'STUDIO_TWITTER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
     // Register Hooks
-    register_activation_hook(__FILE__,   ['StudioVisual\Twitter\Autotwitter_App', 'activate']);
-    register_deactivation_hook(__FILE__, ['StudioVisual\Twitter\Autotwitter_App', 'deactivate']);
-    register_uninstall_hook(__FILE__,    ['StudioVisual\Twitter\Autotwitter_App', 'uninstall']);
+    register_activation_hook(__FILE__,   ['StudioVisual\Twitter\Autotwitter_App', 'autotwitter_activate']);
+    register_deactivation_hook(__FILE__, ['StudioVisual\Twitter\Autotwitter_App', 'autotwitter_deactivate']);
+    register_uninstall_hook(__FILE__,    ['StudioVisual\Twitter\Autotwitter_App', 'autotwitter_uninstall']);
 
     // Instance
     $app = new StudioVisual\Twitter\Autotwitter_App;
