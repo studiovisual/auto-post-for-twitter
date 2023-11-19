@@ -49,28 +49,28 @@ Class Autotwitter_Admin {
             Autotwitter_App::$name,
             Autotwitter_App::$name,
             'manage_options',
-            Autotwitter_App::getKey(),
+            Autotwitter_App::autotwitter_getKey(),
             [$this, 'settingsPage'],
             'dashicons-twitter',
             99.59,
         );
 
         add_submenu_page(
-            Autotwitter_App::getKey(),
+            Autotwitter_App::autotwitter_getKey(),
             __('Documentação', 'sv-twitter'),
             __('Documentação', 'sv-twitter'),
             'manage_options',
-            Autotwitter_App::getKey('docs_'),
+            Autotwitter_App::autotwitter_getKey('docs_'),
             [$this, 'docs'],
             2,
         );
 
         add_submenu_page(
-            Autotwitter_App::getKey(),
+            Autotwitter_App::autotwitter_getKey(),
             __('Logs', 'sv-twitter'),
             __('Logs', 'sv-twitter'),
             'manage_options',
-            Autotwitter_App::getKey('logs_'),
+            Autotwitter_App::autotwitter_getKey('logs_'),
             [$this, 'logs'],
             2,
         );
@@ -84,7 +84,7 @@ Class Autotwitter_Admin {
         $validation = Autotwitter_App::getSlug('errors');
         $group      = Autotwitter_App::getSlug('settings');
         $slug       = Autotwitter_App::getSlug();
-        $docs       = Autotwitter_App::getKey('docs_');
+        $docs       = Autotwitter_App::autotwitter_getKey('docs_');
 
         require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/settings.php';
     }
@@ -94,7 +94,7 @@ Class Autotwitter_Admin {
     * @return void
     */
     public function docs(): void {
-        $settingsPage = Autotwitter_App::getKey();
+        $settingsPage = Autotwitter_App::autotwitter_getKey();
         require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/docs.php';
     }
 
@@ -111,7 +111,7 @@ Class Autotwitter_Admin {
 
         // Get last 30 logs
         $logs     = $this->logs->get();
-        $current  = Autotwitter_App::getKey('logs_');
+        $current  = Autotwitter_App::autotwitter_getKey('logs_');
 
         require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/logs.php';
     }
@@ -376,7 +376,7 @@ Class Autotwitter_Admin {
 
         if(
             isset( $_GET[ 'page' ] )
-            && Autotwitter_App::getKey() == $_GET[ 'page' ]
+            && Autotwitter_App::autotwitter_getKey() == $_GET[ 'page' ]
             && isset( $_GET[ 'settings-updated' ] )
             && true == $_GET[ 'settings-updated' ]
         ) {
@@ -391,7 +391,7 @@ Class Autotwitter_Admin {
 
         if(
             isset( $_GET[ 'page' ] )
-            && Autotwitter_App::getKey('logs_') == $_GET[ 'page' ]
+            && Autotwitter_App::autotwitter_getKey('logs_') == $_GET[ 'page' ]
             && $_SERVER['REQUEST_METHOD'] === 'POST'
             && !empty($_POST['clear'])
         ) {
@@ -420,8 +420,8 @@ Class Autotwitter_Admin {
         }
 
         add_meta_box(
-            Autotwitter_App::getKey(),
-            __(Autotwitter_App::$name, Autotwitter_App::getKey()),
+            Autotwitter_App::autotwitter_getKey(),
+            __(Autotwitter_App::$name, Autotwitter_App::autotwitter_getKey()),
             [$this, 'renderMetaBox'],
             $post_type,
             'side',

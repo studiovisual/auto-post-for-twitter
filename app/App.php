@@ -61,7 +61,7 @@ Class Autotwitter_App {
     * Concat Key with prefix and name
     * @return string
     */
-    public static function getKey(string $key = ''): string {
+    public static function autotwitter_getKey(string $key = ''): string {
         return str_replace('_', '-', $key . self::$prefix . sanitize_title(self::$name));
     }
 
