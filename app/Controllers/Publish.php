@@ -14,7 +14,7 @@ Class Autotwitter_Publish {
     public function __construct() {
         // Instance dependences
         $this->logs    = new Autotwitter_Logs;
-        $this->twitter = new ApiTwitter;
+        $this->twitter = new Autotwitter_ApiTwitter;
 
         // Add hook only if options is active
         if(Autotwitter_Admin::autotwitter_isActive()) {
