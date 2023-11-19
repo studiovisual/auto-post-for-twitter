@@ -61,7 +61,7 @@ Class Autotwitter_Admin {
             __('Documentação', 'sv-twitter'),
             'manage_options',
             Autotwitter_App::autotwitter_getKey('docs_'),
-            [$this, 'auto_twitter_docs'],
+            [$this, 'autotwitter_docs'],
             2,
         );
 
@@ -93,7 +93,7 @@ Class Autotwitter_Admin {
     * Docs Page
     * @return void
     */
-    public function auto_twitter_docs(): void {
+    public function autotwitter_docs(): void {
         $settingsPage = Autotwitter_App::autotwitter_getKey();
         require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/docs.php';
     }
@@ -106,11 +106,11 @@ Class Autotwitter_Admin {
         // Clear the logs
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             // clear logs
-            $this->logs->truncate();
+            $this->logs->autotwitter_truncate();
         }
 
         // Get last 30 logs
-        $logs     = $this->logs->get();
+        $logs     = $this->logs->autotwitter_get();
         $current  = Autotwitter_App::autotwitter_getKey('logs_');
 
         require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/logs.php';

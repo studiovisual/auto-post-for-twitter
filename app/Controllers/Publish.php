@@ -78,7 +78,7 @@ Class Autotwitter_Publish {
             $message = $title . ' ' . $link;
 
             // Create Tweet
-            $publish = $this->twitter->createTweet($post->ID, $message);
+            $publish = $this->twitter->autotwitter_createTweet($post->ID, $message);
 
             if(!empty($publish)) {
                 // Setup Message Log
