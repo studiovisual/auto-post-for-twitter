@@ -18,8 +18,8 @@ Class Autotwitter_Publish {
 
         // Add hook only if options is active
         if(Autotwitter_Admin::autotwitter_isActive()) {
-            add_action('future_to_publish', [$this, 'publishFuture']);
-            add_action('save_post',         [$this, 'publishPost'], 10, 2);
+            add_action('future_to_publish', [$this, 'autotwitter_publishFuture']);
+            add_action('save_post',         [$this, 'autotwitter_publishPost'], 10, 2);
         }
     }
 
@@ -27,9 +27,9 @@ Class Autotwitter_Publish {
     * Future to Publish Trigger
     * @param WP_Post $post
     */
-    public function publishFuture(\WP_Post $post): void {
+    public function autotwitter_publishFuture(\WP_Post $post): void {
         update_post_meta($post->ID, 'future_post_trigger', date('Y-m-d H:i:s'));
-        $this->triggerTweet($post);
+        $this->autotwitter_triggerTweet($post);
     }
 
     /**
@@ -38,7 +38,7 @@ Class Autotwitter_Publish {
     * @param WP_Post $post
     * @return void
     */
-    public function publishPost(int $post_id, \WP_Post $post) {
+    public function autotwitter_publishPost(int $post_id, \WP_Post $post) {
         // Check if it's not triggered by gutemberg
         if(strpos($_SERVER['REQUEST_URI'], 'post.php') === false || !$_SERVER['REQUEST_METHOD'] === 'POST') {
             return;
@@ -49,7 +49,7 @@ Class Autotwitter_Publish {
             return;
         }
 
-        $this->triggerTweet($post);
+        $this->autotwitter_triggerTweet($post);
     }
 
     /**
@@ -57,9 +57,9 @@ Class Autotwitter_Publish {
     * @param WP_Post $post
     * @return void
     */
-    public function triggerTweet(\WP_Post $post): void {
+    public function autotwitter_triggerTweet(\WP_Post $post): void {
         // Checks for validations
-        if(!$this->canPublish($post->ID, $post->post_type)) {
+        if(!$this->autotwitter_canPublish($post->ID, $post->post_type)) {
             return;
         }
 
@@ -110,7 +110,7 @@ Class Autotwitter_Publish {
     * @param string $post_type
     * @return bool
     */
-    public function canPublish(int $post_id, string $post_type): bool {
+    public function autotwitter_canPublish(int $post_id, string $post_type): bool {
 
         if(empty($post_id)) {
             return false;
