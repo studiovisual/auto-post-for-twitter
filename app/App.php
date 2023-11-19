@@ -3,7 +3,7 @@
 namespace StudioVisual\Twitter;
 
 use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
-use StudioVisual\Twitter\Controllers\Publish;
+use StudioVisual\Twitter\Controllers\Autotwitter_Publish;
 use StudioVisual\Twitter\Models\Logs;
 
 Class Autotwitter_App {
@@ -14,7 +14,7 @@ Class Autotwitter_App {
     public function __construct() {
         // Instance dependences
         new Autotwitter_Admin;
-        new Publish;
+        new Autotwitter_Publish;
     }
 
     /**

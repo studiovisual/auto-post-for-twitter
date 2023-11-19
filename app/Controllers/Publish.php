@@ -7,7 +7,7 @@ use StudioVisual\Twitter\Models\Logs;
 use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
 use StudioVisual\Twitter\Controllers\ApiTwitter;
 
-Class Publish {
+Class Autotwitter_Publish {
     protected $logs;
     protected $options;
 
