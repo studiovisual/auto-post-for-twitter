@@ -6,7 +6,7 @@ use StudioVisual\Twitter\Controllers\Admin;
 use StudioVisual\Twitter\Controllers\Publish;
 use StudioVisual\Twitter\Models\Logs;
 
-Class App {
+Class Autotwitter_App {
     // Variables
     static $name   = 'Auto Post for Twitter';
     static $prefix = 'sv_';
@@ -14,11 +14,11 @@ Class App {
     public function __construct() {
         // Instance dependences
         new Admin;
-        new Publish;        
+        new Publish;
     }
-    
+
     /**
-    * Activate plugin 
+    * Activate plugin
     * @return void
     */
     public static function activate(): void {
@@ -30,7 +30,7 @@ Class App {
     }
 
     /**
-    * Deactivate plugin 
+    * Deactivate plugin
     * @return void
     */
     public static function deactivate(): void {
@@ -39,7 +39,7 @@ Class App {
 
     /**
     * Uninstall plugin
-    * @return void 
+    * @return void
     */
     public static function uninstall(): void {
         // Remove options
@@ -59,7 +59,7 @@ Class App {
 
     /**
     * Concat Key with prefix and name
-    * @return string  
+    * @return string
     */
     public static function getKey(string $key = ''): string {
         return str_replace('_', '-', $key . self::$prefix . sanitize_title(self::$name));
@@ -67,7 +67,7 @@ Class App {
 
     /**
     * Format key to save options
-    * @return string  
+    * @return string
     */
     public static function getSlug(string $key = ''): string {
         return !empty($key) ? strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)) . '_' . $key) : strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)));

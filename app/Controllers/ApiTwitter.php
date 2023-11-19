@@ -2,7 +2,7 @@
 
 namespace StudioVisual\Twitter\Controllers;
 
-use StudioVisual\Twitter\App;
+use StudioVisual\Twitter\Autotwitter_App;
 use StudioVisual\Twitter\Models\Logs;
 use StudioVisual\Twitter\Controllers\Admin;
 
@@ -11,7 +11,7 @@ class ApiTwitter {
     protected $options;
 
     public function __construct() {
-        // Instance dependences        
+        // Instance dependences
         $this->logs    = new Logs;
     }
 

@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace StudioVisual\Twitter\Models;
 
-use StudioVisual\Twitter\App;
+use StudioVisual\Twitter\Autotwitter_App;
 
 class Logs {
     protected $table;
@@ -11,7 +11,7 @@ class Logs {
         global $wpdb;
 
         // Get slugified name from plugin
-        $this->table = $wpdb->prefix . App::getSlug('logs'); 
+        $this->table = $wpdb->prefix . Autotwitter_App::getSlug('logs');
     }
 
     /**
@@ -42,7 +42,7 @@ class Logs {
             }
 
             // Add version
-            add_option(App::getSlug('dbversion'), STUDIO_TWITTER_VERSION);
+            add_option(Autotwitter_App::getSlug('dbversion'), STUDIO_TWITTER_VERSION);
         }
 
         return true;
@@ -50,7 +50,7 @@ class Logs {
 
     /**
     * Drop Table
-    * @return bool 
+    * @return bool
     */
     public function drop(): bool {
         global $wpdb;
@@ -63,7 +63,7 @@ class Logs {
     * @param int post_id
     * @param string $status
     * @param string $message
-    * @return bool 
+    * @return bool
     */
     public function add(int $post_id, string $status, string $message): bool {
         global $wpdb;
@@ -86,7 +86,7 @@ class Logs {
 
     /**
     * Truncate Logs
-    * @return void 
+    * @return void
     */
     public function truncate() {
         global $wpdb;

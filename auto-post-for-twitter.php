@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /***************************************************************************
 Plugin Name:  Auto Post for Twitter
@@ -21,19 +21,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 require __DIR__.'/vendor/autoload.php';
 
 
-if(class_exists('StudioVisual\Twitter\App')) {
+if(class_exists('StudioVisual\Twitter\Autotwitter_App')) {
     // Define Constants
     define( 'STUDIO_TWITTER_VERSION', '1.0.0' );
     define( 'STUDIO_TWITTER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
     define( 'STUDIO_TWITTER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
     // Register Hooks
-    register_activation_hook(__FILE__,   ['StudioVisual\Twitter\App', 'activate']);
-    register_deactivation_hook(__FILE__, ['StudioVisual\Twitter\App', 'deactivate']);
-    register_uninstall_hook(__FILE__,    ['StudioVisual\Twitter\App', 'uninstall']);
+    register_activation_hook(__FILE__,   ['StudioVisual\Twitter\Autotwitter_App', 'activate']);
+    register_deactivation_hook(__FILE__, ['StudioVisual\Twitter\Autotwitter_App', 'deactivate']);
+    register_uninstall_hook(__FILE__,    ['StudioVisual\Twitter\Autotwitter_App', 'uninstall']);
 
     // Instance
-    $app = new StudioVisual\Twitter\App;
+    $app = new StudioVisual\Twitter\Autotwitter_App;
 
     // Add location support
     add_action('plugins_loaded', function() {

@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace StudioVisual\Twitter\Controllers;
 
-use StudioVisual\Twitter\App;
+use StudioVisual\Twitter\Autotwitter_App;
 use StudioVisual\Twitter\Models\Logs;
 use StudioVisual\Twitter\Controllers\Admin;
 use StudioVisual\Twitter\Controllers\ApiTwitter;
@@ -15,7 +15,7 @@ Class Publish {
         // Instance dependences
         $this->logs    = new Logs;
         $this->twitter = new ApiTwitter;
-        
+
         // Add hook only if options is active
         if(Admin::isActive()) {
             add_action('future_to_publish', [$this, 'publishFuture']);
@@ -25,7 +25,7 @@ Class Publish {
 
     /**
     * Future to Publish Trigger
-    * @param WP_Post $post 
+    * @param WP_Post $post
     */
     public function publishFuture(\WP_Post $post): void {
         update_post_meta($post->ID, 'future_post_trigger', date('Y-m-d H:i:s'));
@@ -38,7 +38,7 @@ Class Publish {
     * @param WP_Post $post
     * @return void
     */
-    public function publishPost(int $post_id, \WP_Post $post) {       
+    public function publishPost(int $post_id, \WP_Post $post) {
         // Check if it's not triggered by gutemberg
         if(strpos($_SERVER['REQUEST_URI'], 'post.php') === false || !$_SERVER['REQUEST_METHOD'] === 'POST') {
             return;
@@ -49,13 +49,13 @@ Class Publish {
             return;
         }
 
-        $this->triggerTweet($post);        
+        $this->triggerTweet($post);
     }
 
     /**
     * Abstract function to trigger Tweet
     * @param WP_Post $post
-    * @return void 
+    * @return void
     */
     public function triggerTweet(\WP_Post $post): void {
         // Checks for validations
@@ -64,7 +64,7 @@ Class Publish {
         }
 
         // Setup variables
-        $slug      = App::getSlug();
+        $slug      = Autotwitter_App::getSlug();
         $active    = $slug . '_active';
         $newTitle  = $slug . '_title';
         $auto_post = !empty($_POST[$active]) ? $_POST[$active] : get_post_meta($post->ID, $active, true);
@@ -76,13 +76,13 @@ Class Publish {
             $title   = !empty($title) ? $title : strip_tags(get_the_title($post->ID));
             $link    = get_permalink($post->ID);
             $message = $title . ' ' . $link;
-            
+
             // Create Tweet
             $publish = $this->twitter->createTweet($post->ID, $message);
 
             if(!empty($publish)) {
                 // Setup Message Log
-                $log = '[' . $post->ID . '] ' . $title . ' | Response API: [' . $publish['code'] . '] - ' . $publish['body'];                    
+                $log = '[' . $post->ID . '] ' . $title . ' | Response API: [' . $publish['code'] . '] - ' . $publish['body'];
 
                 if($publish['code'] === 201 || $publish['code'] === 200) {
                     // Success
@@ -92,7 +92,7 @@ Class Publish {
                     update_post_meta($post->ID, 'twitter_published', true);
 
                     // Update auto post
-                    $check = update_post_meta($post->ID, $active, 'no');                
+                    $check = update_post_meta($post->ID, $active, 'no');
                     $_POST[$active] = 'no';
 
                     return;
@@ -101,7 +101,7 @@ Class Publish {
                 // Log error on API
                 $this->logs->add($post->ID, __('falhou', 'sv-twitter'), $log);
             }
-        }    
+        }
     }
 
     /**
@@ -111,7 +111,7 @@ Class Publish {
     * @return bool
     */
     public function canPublish(int $post_id, string $post_type): bool {
-        
+
         if(empty($post_id)) {
             return false;
         }
@@ -141,7 +141,7 @@ Class Publish {
             $this->logs->add($post_id, 'failed', $log);
             return false;
         }
-        
+
         // get post type settings and current post type for post
         $settingsPostTypes = !empty($pt = Admin::getSettings()['postTypes']) ? $pt : [];
 
