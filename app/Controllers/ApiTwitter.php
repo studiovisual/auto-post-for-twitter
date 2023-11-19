@@ -20,13 +20,13 @@ class Autotwitter_ApiTwitter {
     * @param int $post_id
     * @param string $message
     */
-    public function createTweet(int $post_id, string $message) {
+    public function autotwitter_createTweet(int $post_id, string $message) {
         $url    = 'https://api.twitter.com/2/tweets';
         $method = 'POST';
 
         $request_args = array(
             'headers'     => array(
-                'Authorization' => $this->generateOAuthSignature($method, $url),
+                'Authorization' => $this->autotwitter_generateOAuthSignature($method, $url),
                 'Content-Type'  => 'application/json'
             ),
             'body'        => '{"text":"' . $message . '"}',
@@ -59,9 +59,9 @@ class Autotwitter_ApiTwitter {
     * @param string $url
     * @return string
     */
-    private function generateOAuthSignature($method, $url, $params = []) {
+    private function autotwitter_generateOAuthSignature($method, $url, $params = []) {
         // Generate the OAuth nonce and timestamp
-        $nonce = $this->generateNonce();
+        $nonce = $this->autotwitter_generateNonce();
         $timestamp = time();
 
         // Prepare the base string
@@ -97,14 +97,14 @@ class Autotwitter_ApiTwitter {
         $signature        = base64_encode(hash_hmac('sha1', $baseString, $signingKey, true));
         $encodedSignature = rawurlencode($signature);
 
-        return $this->getAuthorization($method, $url, Autotwitter_Admin::autotwitter_getSettings()['consumerKey'], $nonce, $encodedSignature, $timestamp, Autotwitter_Admin::autotwitter_getSettings()['tokenKey']);
+        return $this->autotwitter_getAuthorization($method, $url, Autotwitter_Admin::autotwitter_getSettings()['consumerKey'], $nonce, $encodedSignature, $timestamp, Autotwitter_Admin::autotwitter_getSettings()['tokenKey']);
     }
 
     /**
     * Generate Nonce
     * @return string
     */
-    private function generateNonce() {
+    private function autotwitter_generateNonce() {
         return md5(uniqid(rand(), true));
     }
 
@@ -119,7 +119,7 @@ class Autotwitter_ApiTwitter {
     * @param string $tokenKey
     * @return string
     */
-    private function getAuthorization(string $method, string $url, string $consumerKey, string $nonce, string $signature, string $timestamp, string $tokenKey): string {
+    private function autotwitter_getAuthorization(string $method, string $url, string $consumerKey, string $nonce, string $signature, string $timestamp, string $tokenKey): string {
         return 'OAuth oauth_consumer_key="'.$consumerKey.'", oauth_nonce="'.$nonce.'", oauth_signature="'.$signature.'", oauth_signature_method="HMAC-SHA1", oauth_timestamp="'.$timestamp.'", oauth_token="'.$tokenKey.'", oauth_version="1.0"';
     }
 }
