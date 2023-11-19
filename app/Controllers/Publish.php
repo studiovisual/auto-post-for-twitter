@@ -86,7 +86,7 @@ Class Autotwitter_Publish {
 
                 if($publish['code'] === 201 || $publish['code'] === 200) {
                     // Success
-                    $this->logs->add($post->ID, __('sucesso', 'sv-twitter'), $log);
+                    $this->logs->autotwitter_add($post->ID, __('sucesso', 'sv-twitter'), $log);
 
                     // update meta field to not publish on twitter again
                     update_post_meta($post->ID, 'twitter_published', true);
@@ -99,7 +99,7 @@ Class Autotwitter_Publish {
                 }
 
                 // Log error on API
-                $this->logs->add($post->ID, __('falhou', 'sv-twitter'), $log);
+                $this->logs->autotwitter_add($post->ID, __('falhou', 'sv-twitter'), $log);
             }
         }
     }
@@ -138,7 +138,7 @@ Class Autotwitter_Publish {
 
             $message = __('Não enviado por estar em categoria bloqueada | Categoria(s):', 'sv-twitter');
             $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . implode(", ", $cats);
-            $this->logs->add($post_id, 'failed', $log);
+            $this->logs->autotwitter_add($post_id, 'failed', $log);
             return false;
         }
 
@@ -149,7 +149,7 @@ Class Autotwitter_Publish {
         if(!in_array($post_type, $settingsPostTypes)) {
             $message = __('Não enviado por estar em tipo de post bloqueado | Tipo de post:', 'sv-twitter');
             $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . $post_type;
-            $this->logs->add($post_id, 'failed', $log);
+            $this->logs->autotwitter_add($post_id, 'failed', $log);
             return false;
         }
 

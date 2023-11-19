@@ -18,7 +18,7 @@ class Autotwitter_Logs {
     * Create Table Logs
     * @return bool
     */
-    public function createTable(): bool {
+    public function autotwitter_createTable(): bool {
         global $wpdb;
 
         // Check if Table Exists
@@ -52,7 +52,7 @@ class Autotwitter_Logs {
     * Drop Table
     * @return bool
     */
-    public function drop(): bool {
+    public function autotwitter_drop(): bool {
         global $wpdb;
 
         return $wpdb->query('DROP TABLE IF EXISTS ' . $this->table);
@@ -65,7 +65,7 @@ class Autotwitter_Logs {
     * @param string $message
     * @return bool
     */
-    public function add(int $post_id, string $status, string $message): bool {
+    public function autotwitter_add(int $post_id, string $status, string $message): bool {
         global $wpdb;
 
         if(!$post_id || !$message || !$status) {
@@ -88,7 +88,7 @@ class Autotwitter_Logs {
     * Truncate Logs
     * @return void
     */
-    public function truncate() {
+    public function autotwitter_truncate() {
         global $wpdb;
 
         $query = "TRUNCATE TABLE " . $this->table;
@@ -100,7 +100,7 @@ class Autotwitter_Logs {
     * @param int $limit
     * @return array
     */
-    public function get(int $limit = 30): array {
+    public function autotwitter_get(int $limit = 30): array {
         global $wpdb;
 
         $query = "SELECT * FROM " . $this->table . " ORDER BY id DESC LIMIT " . $limit . " ";

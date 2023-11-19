@@ -38,7 +38,7 @@ class Autotwitter_ApiTwitter {
             $error_message = $response->get_error_message();
 
             // Add Fail log
-            $this->logs->add($post_id, __('falhou', 'sv-twitter'), json_encode($error_message));
+            $this->logs->autotwitter_add($post_id, __('falhou', 'sv-twitter'), json_encode($error_message));
 
             return false;
         } else {

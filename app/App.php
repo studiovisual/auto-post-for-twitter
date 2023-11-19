@@ -26,7 +26,7 @@ Class Autotwitter_App {
 
         // Create Table Logs
         $logs = new Autotwitter_Logs;
-        $logs->createTable();
+        $logs->autotwitter_createTable();
     }
 
     /**
@@ -54,7 +54,7 @@ Class Autotwitter_App {
 
         // Drop table
         $logs = new Autotwitter_Logs;
-        $logs->drop();
+        $logs->autotwitter_drop();
     }
 
     /**
