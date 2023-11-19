@@ -4,7 +4,7 @@ namespace StudioVisual\Twitter\Controllers;
 
 use StudioVisual\Twitter\Autotwitter_App;
 use StudioVisual\Twitter\Models\Logs;
-use StudioVisual\Twitter\Controllers\Admin;
+use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
 
 class ApiTwitter {
     protected $logs;
@@ -70,11 +70,11 @@ class ApiTwitter {
 
         // Combine the OAuth parameters with the request parameters
         $allParams = array_merge($params, array(
-            'oauth_consumer_key'     => Admin::getSettings()['consumerKey'],
+            'oauth_consumer_key'     => Autotwitter_Admin::getSettings()['consumerKey'],
             'oauth_nonce'            => $nonce,
             'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_timestamp'        => $timestamp,
-            'oauth_token'            => Admin::getSettings()['tokenKey'],
+            'oauth_token'            => Autotwitter_Admin::getSettings()['tokenKey'],
             'oauth_version'          => '1.0',
         ));
 
@@ -89,15 +89,15 @@ class ApiTwitter {
         $baseString          = $encodedMethod . '&' . $encodedUrl . '&' . $encodedParamsString;
 
         // Generate the signing key
-        $encodedConsumerSecret = rawurlencode(Admin::getSettings()['consumerSecret']);
-        $encodedTokenSecret    = rawurlencode(Admin::getSettings()['tokenSecret']);
+        $encodedConsumerSecret = rawurlencode(Autotwitter_Admin::getSettings()['consumerSecret']);
+        $encodedTokenSecret    = rawurlencode(Autotwitter_Admin::getSettings()['tokenSecret']);
         $signingKey            = $encodedConsumerSecret . '&' . $encodedTokenSecret;
 
         // Calculate the HMAC-SHA1 signature
         $signature        = base64_encode(hash_hmac('sha1', $baseString, $signingKey, true));
         $encodedSignature = rawurlencode($signature);
 
-        return $this->getAuthorization($method, $url, Admin::getSettings()['consumerKey'], $nonce, $encodedSignature, $timestamp, Admin::getSettings()['tokenKey']);
+        return $this->getAuthorization($method, $url, Autotwitter_Admin::getSettings()['consumerKey'], $nonce, $encodedSignature, $timestamp, Autotwitter_Admin::getSettings()['tokenKey']);
     }
 
     /**

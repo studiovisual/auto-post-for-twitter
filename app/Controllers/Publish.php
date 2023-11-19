@@ -4,7 +4,7 @@ namespace StudioVisual\Twitter\Controllers;
 
 use StudioVisual\Twitter\Autotwitter_App;
 use StudioVisual\Twitter\Models\Logs;
-use StudioVisual\Twitter\Controllers\Admin;
+use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
 use StudioVisual\Twitter\Controllers\ApiTwitter;
 
 Class Publish {
@@ -17,7 +17,7 @@ Class Publish {
         $this->twitter = new ApiTwitter;
 
         // Add hook only if options is active
-        if(Admin::isActive()) {
+        if(Autotwitter_Admin::isActive()) {
             add_action('future_to_publish', [$this, 'publishFuture']);
             add_action('save_post',         [$this, 'publishPost'], 10, 2);
         }
@@ -123,7 +123,7 @@ Class Publish {
 
         // Check if Has any categories checked on options and stops publish on twitter
         $post_categories    = wp_get_post_categories($post_id);
-        $twitter_categories = !empty(Admin::getSettings()['categories']) ? Admin::getSettings()['categories'] : [];
+        $twitter_categories = !empty(Autotwitter_Admin::getSettings()['categories']) ? Autotwitter_Admin::getSettings()['categories'] : [];
         $has_categories     = array_intersect($post_categories, $twitter_categories);
 
         // If there's a blocked categorie skip tweet
@@ -143,7 +143,7 @@ Class Publish {
         }
 
         // get post type settings and current post type for post
-        $settingsPostTypes = !empty($pt = Admin::getSettings()['postTypes']) ? $pt : [];
+        $settingsPostTypes = !empty($pt = Autotwitter_Admin::getSettings()['postTypes']) ? $pt : [];
 
         // Checks if post type not in settings
         if(!in_array($post_type, $settingsPostTypes)) {

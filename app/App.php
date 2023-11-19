@@ -2,7 +2,7 @@
 
 namespace StudioVisual\Twitter;
 
-use StudioVisual\Twitter\Controllers\Admin;
+use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
 use StudioVisual\Twitter\Controllers\Publish;
 use StudioVisual\Twitter\Models\Logs;
 
@@ -13,7 +13,7 @@ Class Autotwitter_App {
 
     public function __construct() {
         // Instance dependences
-        new Admin;
+        new Autotwitter_Admin;
         new Publish;
     }
 

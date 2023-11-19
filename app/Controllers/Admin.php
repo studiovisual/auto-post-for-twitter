@@ -5,7 +5,7 @@ namespace StudioVisual\Twitter\Controllers;
 use StudioVisual\Twitter\Autotwitter_App;
 use StudioVisual\Twitter\Models\Logs;
 
-Class Admin {
+Class Autotwitter_Admin {
 	public function __construct() {
         // Hook to create admin menu
         add_action('admin_menu', [$this, 'optionsPage']);
