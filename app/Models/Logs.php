@@ -4,7 +4,7 @@ namespace StudioVisual\Twitter\Models;
 
 use StudioVisual\Twitter\Autotwitter_App;
 
-class Logs {
+class Autotwitter_Logs {
     protected $table;
 
     public function __construct() {

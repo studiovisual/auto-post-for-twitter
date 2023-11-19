@@ -3,7 +3,7 @@
 namespace StudioVisual\Twitter\Controllers;
 
 use StudioVisual\Twitter\Autotwitter_App;
-use StudioVisual\Twitter\Models\Logs;
+use StudioVisual\Twitter\Models\Autotwitter_Logs;
 
 Class Autotwitter_Admin {
 	public function __construct() {
@@ -26,7 +26,7 @@ Class Autotwitter_Admin {
         add_action('save_post', [$this, 'saveMetaBox'], 11);
 
         // Instance Class
-        $this->logs = new Logs;
+        $this->logs = new Autotwitter_Logs;
     }
 
     /**

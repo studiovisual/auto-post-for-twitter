@@ -3,7 +3,7 @@
 namespace StudioVisual\Twitter\Controllers;
 
 use StudioVisual\Twitter\Autotwitter_App;
-use StudioVisual\Twitter\Models\Logs;
+use StudioVisual\Twitter\Models\Autotwitter_Logs;
 use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
 
 class ApiTwitter {
@@ -12,7 +12,7 @@ class ApiTwitter {
 
     public function __construct() {
         // Instance dependences
-        $this->logs    = new Logs;
+        $this->logs    = new Autotwitter_Logs;
     }
 
     /**

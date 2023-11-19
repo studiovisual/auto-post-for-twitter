@@ -4,7 +4,7 @@ namespace StudioVisual\Twitter;
 
 use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
 use StudioVisual\Twitter\Controllers\Autotwitter_Publish;
-use StudioVisual\Twitter\Models\Logs;
+use StudioVisual\Twitter\Models\Autotwitter_Logs;
 
 Class Autotwitter_App {
     // Variables
@@ -25,7 +25,7 @@ Class Autotwitter_App {
         update_option('rewrite_rules', '');
 
         // Create Table Logs
-        $logs = new Logs;
+        $logs = new Autotwitter_Logs;
         $logs->createTable();
     }
 
@@ -53,7 +53,7 @@ Class Autotwitter_App {
         delete_option(self::getSlug('dbversion'));
 
         // Drop table
-        $logs = new Logs;
+        $logs = new Autotwitter_Logs;
         $logs->drop();
     }
 
