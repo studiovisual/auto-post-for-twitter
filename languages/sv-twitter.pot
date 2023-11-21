@@ -104,14 +104,14 @@ msgid ""
 "Suas opções foram salvas."
 msgstr ""
 
-#: app/Controllers/Publish.php:139
+#: app/Controllers/Autotwitter_Publish.php:139
 msgid ""
 "Não enviado por estar em "
 "categoria bloqueada | "
 "Categoria(s):"
 msgstr ""
 
-#: app/Controllers/Publish.php:150
+#: app/Controllers/Autotwitter_Publish.php:150
 msgid ""
 "Não enviado por estar em "
 "tipo de post bloqueado | "
