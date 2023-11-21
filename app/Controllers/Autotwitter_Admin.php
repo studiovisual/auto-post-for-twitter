@@ -288,10 +288,10 @@ Class Autotwitter_Admin {
     function autotwitter_fieldText(array $args): void {
         printf(
             '<input type="text" id="%s" name="%s" class="%s" value="%s" />',
-            $args['name'],
-            $args['name'],
-            $args['class'],
-            get_option($args['name']) ?? '',
+            esc_html($args['name']),
+            esc_html($args['name']),
+            esc_html($args['class']),
+            esc_html(get_option($args['name'])) ?? '',
         );
     }
 
