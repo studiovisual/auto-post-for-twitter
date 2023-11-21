@@ -303,7 +303,7 @@ Class Autotwitter_Admin {
     function autotwitter_fieldBoolean(array $args): void {
         $value = get_option($args['name']);
         ?>
-            <input type="checkbox" name="<?php echo $args['name']; ?>" id="<?php echo $args['name']; ?>" value="on" <?php checked($value, 'on') ?> />
+            <input type="checkbox" name="<?php echo esc_attr($args['name']); ?>" id="<?php echo esc_attr($args['name']); ?>" value="on" <?php checked($value, 'on') ?> />
         <?php
     }
 
@@ -383,7 +383,7 @@ Class Autotwitter_Admin {
             ?>
                 <div class="notice notice-success is-dismissible">
                     <p>
-                        <strong><?php echo _e('Suas opções foram salvas.', 'sv-twitter'); ?></strong>
+                        <strong><?php echo esc_html_e('Suas opções foram salvas.', 'sv-twitter'); ?></strong>
                     </p>
                 </div>
             <?php
@@ -398,7 +398,7 @@ Class Autotwitter_Admin {
             ?>
                 <div class="notice notice-success is-dismissible">
                     <p>
-                        <strong><?php echo _e('Seus logs foram excluídos.', 'sv-twitter'); ?></strong>
+                        <strong><?php echo esc_html_e('Seus logs foram excluídos.', 'sv-twitter'); ?></strong>
                     </p>
                 </div>
             <?php
