@@ -23,68 +23,68 @@ msgstr ""
 "X-Generator: Poedit 3.3.2\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: app/Controllers/Admin.php:60 app/Controllers/Admin.php:61
+#: app/Controllers/Autotwitter_Admin.php:60 app/Controllers/Autotwitter_Admin.php:61
 #: views/settings.php:3
 msgid "Documentação"
 msgstr "Documentation"
 
-#: app/Controllers/Admin.php:70 app/Controllers/Admin.php:71
+#: app/Controllers/Autotwitter_Admin.php:70 app/Controllers/Autotwitter_Admin.php:71
 msgid "Logs"
 msgstr "Logs"
 
-#: app/Controllers/Admin.php:141
+#: app/Controllers/Autotwitter_Admin.php:141
 msgid "Ativar"
 msgstr "Activate"
 
-#: app/Controllers/Admin.php:153 app/Controllers/Admin.php:160
+#: app/Controllers/Autotwitter_Admin.php:153 app/Controllers/Autotwitter_Admin.php:160
 msgid "Consumer Key"
 msgstr "Consumer Key"
 
-#: app/Controllers/Admin.php:172 app/Controllers/Admin.php:179
+#: app/Controllers/Autotwitter_Admin.php:172 app/Controllers/Autotwitter_Admin.php:179
 msgid "Consumer Secret"
 msgstr "Consumer Secret"
 
-#: app/Controllers/Admin.php:191 app/Controllers/Admin.php:198
+#: app/Controllers/Autotwitter_Admin.php:191 app/Controllers/Autotwitter_Admin.php:198
 msgid "Token Key"
 msgstr "Token Key"
 
-#: app/Controllers/Admin.php:210 app/Controllers/Admin.php:217
+#: app/Controllers/Autotwitter_Admin.php:210 app/Controllers/Autotwitter_Admin.php:217
 msgid "Token Secret"
 msgstr "Token Secret"
 
-#: app/Controllers/Admin.php:232
+#: app/Controllers/Autotwitter_Admin.php:232
 msgid "Tipos de Post"
 msgstr "Post Types"
 
-#: app/Controllers/Admin.php:247
+#: app/Controllers/Autotwitter_Admin.php:247
 msgid "Categorias"
 msgstr "Categories"
 
-#: app/Controllers/Admin.php:351
+#: app/Controllers/Autotwitter_Admin.php:351
 msgid "Você precisa preencher o campo "
 msgstr "You need to fill the field "
 
-#: app/Controllers/Admin.php:386 views/logs.php:7
+#: app/Controllers/Autotwitter_Admin.php:386 views/logs.php:7
 msgid "Suas opções foram salvas."
 msgstr "Your options have been saved."
 
-#: app/Controllers/Admin.php:401
+#: app/Controllers/Autotwitter_Admin.php:401
 msgid "Seus logs foram excluídos."
 msgstr "Your logs have been deleted."
 
-#: app/Controllers/ApiTwitter.php:41 app/Controllers/Publish.php:102
+#: app/Controllers/Autotwitter_ApiTwitter.php:41 app/Controllers/Autotwitter_Publish.php:102 app/Controllers/Autotwitter_Publish.php:141 app/Controllers/Autotwitter_Publish.php:152
 msgid "falhou"
 msgstr "failed"
 
-#: app/Controllers/Publish.php:89
+#: app/Controllers/Autotwitter_Publish.php:89
 msgid "sucesso"
 msgstr "success"
 
-#: app/Controllers/Publish.php:139
+#: app/Controllers/Autotwitter_Publish.php:139
 msgid "Não enviado por estar em categoria bloqueada | Categoria(s):"
 msgstr "Not sent cause it's in a blocked category | Categories:"
 
-#: app/Controllers/Publish.php:150
+#: app/Controllers/Autotwitter_Publish.php:150
 msgid "Não enviado por estar em tipo de post bloqueado | Tipo de post:"
 msgstr "Not sent cause it's in a blocked post Type | Post Type:"
 
