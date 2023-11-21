@@ -72,7 +72,7 @@ msgstr "Your options have been saved."
 msgid "Seus logs foram excluídos."
 msgstr "Your logs have been deleted."
 
-#: app/Controllers/ApiTwitter.php:41 app/Controllers/Publish.php:102
+#: app/Controllers/Autotwitter_ApiTwitter.php:41 app/Controllers/Publish.php:102
 msgid "falhou"
 msgstr "failed"
 
