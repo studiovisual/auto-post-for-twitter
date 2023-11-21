@@ -138,7 +138,7 @@ Class Autotwitter_Publish {
 
             $message = __('Não enviado por estar em categoria bloqueada | Categoria(s):', 'sv-twitter');
             $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . implode(", ", $cats);
-            $this->logs->autotwitter_add($post_id, 'failed', $log);
+            $this->logs->autotwitter_add($post_id, __('falhou', 'sv-twitter'), $log);
             return false;
         }
 
@@ -149,7 +149,7 @@ Class Autotwitter_Publish {
         if(!in_array($post_type, $settingsPostTypes)) {
             $message = __('Não enviado por estar em tipo de post bloqueado | Tipo de post:', 'sv-twitter');
             $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . $post_type;
-            $this->logs->autotwitter_add($post_id, 'failed', $log);
+            $this->logs->autotwitter_add($post_id, __('falhou', 'sv-twitter'), $log);
             return false;
         }
 
