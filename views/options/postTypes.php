@@ -1,4 +1,4 @@
-<p class="helper"><?php echo esc_html_e('Escolha os post types que deverão ser <strong>inclusos</strong>:', 'sv-twitter'); ?></p>
+<p class="helper"><?php echo _e('Escolha os post types que deverão ser <strong>inclusos</strong>:', 'sv-twitter'); ?></p>
 <?php if(!empty($postTypes)) { ?>
     <div class="categories">
         <ul>

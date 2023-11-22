@@ -383,7 +383,7 @@ Class Autotwitter_Admin {
             ?>
                 <div class="notice notice-success is-dismissible">
                     <p>
-                        <strong><?php echo esc_html_e('Suas opções foram salvas.', 'sv-twitter'); ?></strong>
+                        <strong><?php echo _e('Suas opções foram salvas.', 'sv-twitter'); ?></strong>
                     </p>
                 </div>
             <?php
@@ -398,7 +398,7 @@ Class Autotwitter_Admin {
             ?>
                 <div class="notice notice-success is-dismissible">
                     <p>
-                        <strong><?php echo esc_html_e('Seus logs foram excluídos.', 'sv-twitter'); ?></strong>
+                        <strong><?php echo _e('Seus logs foram excluídos.', 'sv-twitter'); ?></strong>
                     </p>
                 </div>
             <?php
