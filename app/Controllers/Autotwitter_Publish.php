@@ -67,12 +67,12 @@ Class Autotwitter_Publish {
         $slug      = Autotwitter_App::autotwitter_getSlug();
         $active    = $slug . '_active';
         $newTitle  = $slug . '_title';
-        $auto_post = !empty($_POST[$active]) ? $_POST[$active] : get_post_meta($post->ID, $active, true);
+        $auto_post = !empty($_POST[$active]) ? sanitize_text_field($_POST[$active]) : get_post_meta($post->ID, $active, true);
 
         // Check if auto post is ready to publish
         if ($auto_post == 'yes' || $auto_post == '') {
             // Format Message
-            $title   = !empty($_POST[$newTitle]) ? $_POST[$newTitle] : get_post_meta($post->ID, $newTitle, true);
+            $title   = !empty($_POST[$newTitle]) ? sanitize_text_field($_POST[$newTitle]) : get_post_meta($post->ID, $newTitle, true);
             $title   = !empty($title) ? $title : strip_tags(get_the_title($post->ID));
             $link    = get_permalink($post->ID);
             $message = $title . ' ' . $link;

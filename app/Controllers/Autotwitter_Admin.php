@@ -471,7 +471,7 @@ Class Autotwitter_Admin {
         }
 
         // Get Nonce from Post
-        $nonce = sanitize_text_field($_POST[$nonce_field]);
+        $nonce = sanitize_text_field(wp_unslash($_POST[$nonce_field]));
 
         // Verify that the nonce is valid.
         if(!wp_verify_nonce($nonce, $nonce_action)) {
