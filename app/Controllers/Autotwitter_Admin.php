@@ -5,8 +5,10 @@ namespace StudioVisual\Twitter\Controllers;
 use StudioVisual\Twitter\Autotwitter_App;
 use StudioVisual\Twitter\Models\Autotwitter_Logs;
 
-Class Autotwitter_Admin {
-	public function __construct() {
+Class Autotwitter_Admin
+{
+    public function __construct()
+    {
         // Hook to create admin menu
         add_action('admin_menu', [$this, 'autotwitter_optionsPage']);
 
@@ -30,21 +32,23 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Enqueue Scripts/Styles
-    *
-    * @return void
-    */
-    function autotwitter_enqueueAssets() {
+     * Enqueue Scripts/Styles
+     *
+     * @return void
+     */
+    function autotwitter_enqueueAssets()
+    {
         wp_enqueue_style('starter-plugin-style', STUDIO_TWITTER_PLUGIN_URL . '/../assets/css/style.css', false, null);
         wp_enqueue_script('starter-plugin-script', STUDIO_TWITTER_PLUGIN_URL . '/assets/js/script.js', array('jquery'));
     }
 
     /**
-    * Create options page
-    *
-    * @return void
-    */
-    public function autotwitter_optionsPage(): void {
+     * Create options page
+     *
+     * @return void
+     */
+    public function autotwitter_optionsPage(): void
+    {
         add_menu_page(
             Autotwitter_App::$name,
             Autotwitter_App::$name,
@@ -77,32 +81,38 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Settings Page
-    * @return void
-    */
-    public function autotwitter_settingsPage(): void {
+     * Settings Page
+     *
+     * @return void
+     */
+    public function autotwitter_settingsPage(): void
+    {
         $validation = Autotwitter_App::autotwitter_getSlug('errors');
         $group      = Autotwitter_App::autotwitter_getSlug('settings');
         $slug       = Autotwitter_App::autotwitter_getSlug();
         $docs       = Autotwitter_App::autotwitter_getKey('docs_');
 
-        require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/settings.php';
+        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/settings.php';
     }
 
     /**
-    * Docs Page
-    * @return void
-    */
-    public function autotwitter_docs(): void {
+     * Docs Page
+     *
+     * @return void
+     */
+    public function autotwitter_docs(): void
+    {
         $settingsPage = Autotwitter_App::autotwitter_getKey();
-        require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/docs.php';
+        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/docs.php';
     }
 
     /**
-    * Logs Page
-    * @return void
-    */
-    public function autotwitter_logs(): void {
+     * Logs Page
+     *
+     * @return void
+     */
+    public function autotwitter_logs(): void
+    {
         // Clear the logs
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             // clear logs
@@ -113,14 +123,16 @@ Class Autotwitter_Admin {
         $logs     = $this->logs->autotwitter_get();
         $current  = Autotwitter_App::autotwitter_getKey('logs_');
 
-        require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/logs.php';
+        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/logs.php';
     }
 
     /**
-    * Settings options fields
-    * @return void
-    */
-    function autotwitter_settingFields(): void {
+     * Settings options fields
+     *
+     * @return void
+     */
+    function autotwitter_settingFields(): void
+    {
 
         // Variables for slugs and group
         $group = Autotwitter_App::autotwitter_getSlug('settings');
@@ -151,9 +163,11 @@ Class Autotwitter_Admin {
 
         // Consumer Key
         $field_name = __('Consumer Key', 'sv-twitter');
-        register_setting($group, Autotwitter_App::autotwitter_getSlug('consumerKey'), function ($value) use ($field_name) {
-            return $this->autotwitter_validationText($value, $field_name);
-        });
+        register_setting(
+            $group, Autotwitter_App::autotwitter_getSlug('consumerKey'), function ($value) use ($field_name) {
+                return $this->autotwitter_validationText($value, $field_name);
+            }
+        );
 
         add_settings_field(
             Autotwitter_App::autotwitter_getSlug('consumerKey'),
@@ -170,9 +184,11 @@ Class Autotwitter_Admin {
 
         // Consumer Secret
         $field_name = __('Consumer Secret', 'sv-twitter');
-        register_setting($group, Autotwitter_App::autotwitter_getSlug('consumerSecret'), function ($value) use ($field_name) {
-            return $this->autotwitter_validationText($value, $field_name);
-        });
+        register_setting(
+            $group, Autotwitter_App::autotwitter_getSlug('consumerSecret'), function ($value) use ($field_name) {
+                return $this->autotwitter_validationText($value, $field_name);
+            }
+        );
 
         add_settings_field(
             Autotwitter_App::autotwitter_getSlug('consumerSecret'),
@@ -189,9 +205,11 @@ Class Autotwitter_Admin {
 
         // Token Key
         $field_name = __('Token Key', 'sv-twitter');
-        register_setting($group, Autotwitter_App::autotwitter_getSlug('tokenKey'), function ($value) use ($field_name) {
-            return $this->autotwitter_validationText($value, $field_name);
-        });
+        register_setting(
+            $group, Autotwitter_App::autotwitter_getSlug('tokenKey'), function ($value) use ($field_name) {
+                return $this->autotwitter_validationText($value, $field_name);
+            }
+        );
 
         add_settings_field(
             Autotwitter_App::autotwitter_getSlug('tokenKey'),
@@ -208,9 +226,11 @@ Class Autotwitter_Admin {
 
         // Token Secret
         $field_name = __('Token Secret', 'sv-twitter');
-        register_setting($group, Autotwitter_App::autotwitter_getSlug('tokenSecret'), function ($value) use ($field_name) {
-            return $this->autotwitter_validationText($value, $field_name);
-        });
+        register_setting(
+            $group, Autotwitter_App::autotwitter_getSlug('tokenSecret'), function ($value) use ($field_name) {
+                return $this->autotwitter_validationText($value, $field_name);
+            }
+        );
 
         add_settings_field(
             Autotwitter_App::autotwitter_getSlug('tokenSecret'),
@@ -257,35 +277,41 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Return all post types registered
-    * @param array $args
-    * @return void
-    */
-    function autotwitter_fieldPostType(array $args): void {
+     * Return all post types registered
+     *
+     * @param  array $args
+     * @return void
+     */
+    function autotwitter_fieldPostType(array $args): void
+    {
         $postTypes  = $this->autotwitter_getPostTypes();
         $checked    = !empty($checked = get_option($args['name'])) ? $checked : [];
 
-        require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/options/postTypes.php';
+        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/options/postTypes.php';
     }
 
     /**
-    * Return Taxonomy Object Field
-    * @param array $args
-    * @return void
-    */
-    function autotwitter_fieldTaxonomy(array $args): void {
+     * Return Taxonomy Object Field
+     *
+     * @param  array $args
+     * @return void
+     */
+    function autotwitter_fieldTaxonomy(array $args): void
+    {
         $categories = get_categories(['hide_empty' => false]);
         $checked    = !empty($checked = get_option($args['name'])) ? $checked : [];
 
-        require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/options/Taxonomies.php';
+        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/options/Taxonomies.php';
     }
 
     /**
-    * Return Text Field
-    * @param array $args
-    * @return void
-    */
-    function autotwitter_fieldText(array $args): void {
+     * Return Text Field
+     *
+     * @param  array $args
+     * @return void
+     */
+    function autotwitter_fieldText(array $args): void
+    {
         printf(
             '<input type="text" id="%s" name="%s" class="%s" value="%s" />',
             esc_html($args['name']),
@@ -296,11 +322,13 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Prints checkbox for boolean fields
-    * @param array $args
-    * @return void
-    */
-    function autotwitter_fieldBoolean(array $args): void {
+     * Prints checkbox for boolean fields
+     *
+     * @param  array $args
+     * @return void
+     */
+    function autotwitter_fieldBoolean(array $args): void
+    {
         $value = get_option($args['name']);
         ?>
             <input type="checkbox" name="<?php echo esc_attr($args['name']); ?>" id="<?php echo esc_attr($args['name']); ?>" value="on" <?php checked($value, 'on') ?> />
@@ -308,11 +336,13 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Check for post types
-    * @param array|null $value
-    * @return array|null
-    */
-    public function autotwitter_validatePostTypes($value) {
+     * Check for post types
+     *
+     * @param  array|null $value
+     * @return array|null
+     */
+    public function autotwitter_validatePostTypes($value)
+    {
         // Check if is empty
         if(empty($value)) {
             // add validation error
@@ -333,12 +363,14 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Validations and Sanitize
-    * @param string $value
-    * @param string $field_name
-    * @return string
-    */
-    public function autotwitter_validationText(string $value, string $field_name) {
+     * Validations and Sanitize
+     *
+     * @param  string $value
+     * @param  string $field_name
+     * @return string
+     */
+    public function autotwitter_validationText(string $value, string $field_name)
+    {
         // Sanitize Text
         $value = sanitize_text_field($value);
 
@@ -362,10 +394,12 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Show notices on saved options
-    * @return void
-    */
-    public function autotwitter_notices(): void {
+     * Show notices on saved options
+     *
+     * @return void
+     */
+    public function autotwitter_notices(): void
+    {
 
         $checkErrors = get_settings_errors(Autotwitter_App::autotwitter_getSlug('errors'));
 
@@ -374,10 +408,9 @@ Class Autotwitter_Admin {
             return;
         }
 
-        if(
-            isset( $_GET[ 'page' ] )
+        if(isset($_GET[ 'page' ])
             && Autotwitter_App::autotwitter_getKey() == $_GET[ 'page' ]
-            && isset( $_GET[ 'settings-updated' ] )
+            && isset($_GET[ 'settings-updated' ])
             && true == $_GET[ 'settings-updated' ]
         ) {
             ?>
@@ -389,8 +422,7 @@ Class Autotwitter_Admin {
             <?php
         }
 
-        if(
-            isset( $_GET[ 'page' ] )
+        if(isset($_GET[ 'page' ])
             && Autotwitter_App::autotwitter_getKey('logs_') == $_GET[ 'page' ]
             && $_SERVER['REQUEST_METHOD'] === 'POST'
             && !empty($_POST['clear'])
@@ -406,11 +438,13 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Add Meta Boxes
-    * @param string $post_type
-    * @return void
-    */
-    public function autotwitter_addMetaBoxes($post_type): void {
+     * Add Meta Boxes
+     *
+     * @param  string $post_type
+     * @return void
+     */
+    public function autotwitter_addMetaBoxes($post_type): void
+    {
 
         // Check if plugin is active and post types is checked
         $settings = self::autotwitter_getSettings();
@@ -430,11 +464,13 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Renders Meta Box
-    * @param Wp_post $post
-    * @return void
-    */
-    public function autotwitter_renderMetaBox($post): void {
+     * Renders Meta Box
+     *
+     * @param  Wp_post $post
+     * @return void
+     */
+    public function autotwitter_renderMetaBox($post): void
+    {
         $slug      = Autotwitter_App::autotwitter_getSlug();
 
         // settings to post
@@ -445,15 +481,17 @@ Class Autotwitter_Admin {
         // Title settings
         $title = get_post_meta($post->ID, $slug . '_title', true);
 
-        require_once STUDIO_TWITTER_PLUGIN_DIR . 'views/metabox/post.php';
+        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/metabox/post.php';
     }
 
     /**
-    * Saves meta box info's
-    * @param int post_id
-    * @return void|int
-    */
-    public function autotwitter_saveMetaBox(int $post_id) {
+     * Saves meta box info's
+     *
+     * @param  int post_id
+     * @return void|int
+     */
+    public function autotwitter_saveMetaBox(int $post_id)
+    {
         // Set Slugs
         $slug          = Autotwitter_App::autotwitter_getSlug();
         $nonce_action  = $slug . '_nonce_action';
@@ -493,10 +531,12 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Get All Settings
-    * @return array
-    */
-    public static function autotwitter_getSettings(): array {
+     * Get All Settings
+     *
+     * @return array
+     */
+    public static function autotwitter_getSettings(): array
+    {
         $settings = [];
         $settings['isActive']       = get_option(Autotwitter_App::autotwitter_getSlug('isactive'));
         $settings['consumerKey']    = get_option(Autotwitter_App::autotwitter_getSlug('consumerKey'));
@@ -510,16 +550,16 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Check's for plugin activation
-    */
-    public static function autotwitter_isActive() {
+     * Check's for plugin activation
+     */
+    public static function autotwitter_isActive()
+    {
 
-        if(
-            empty(self::autotwitter_getSettings()['consumerKey']) ||
-            empty(self::autotwitter_getSettings()['consumerSecret']) ||
-            empty(self::autotwitter_getSettings()['tokenKey']) ||
-            empty(self::autotwitter_getSettings()['tokenSecret']) ||
-            empty(self::autotwitter_getSettings()['postTypes'])
+        if(empty(self::autotwitter_getSettings()['consumerKey']) 
+            || empty(self::autotwitter_getSettings()['consumerSecret']) 
+            || empty(self::autotwitter_getSettings()['tokenKey']) 
+            || empty(self::autotwitter_getSettings()['tokenSecret']) 
+            || empty(self::autotwitter_getSettings()['postTypes'])
         ) {
             return false;
         }
@@ -528,10 +568,12 @@ Class Autotwitter_Admin {
     }
 
     /**
-    * Get Post Types and exclude defaults
-    * @return array
-    */
-    public function autotwitter_getPostTypes(): array {
+     * Get Post Types and exclude defaults
+     *
+     * @return array
+     */
+    public function autotwitter_getPostTypes(): array
+    {
         $post_types = get_post_types();
 
         unset($post_types['revision']);

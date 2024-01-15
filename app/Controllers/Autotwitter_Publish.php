@@ -7,11 +7,13 @@ use StudioVisual\Twitter\Models\Autotwitter_Logs;
 use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
 use StudioVisual\Twitter\Controllers\Autotwitter_ApiTwitter;
 
-Class Autotwitter_Publish {
+Class Autotwitter_Publish
+{
     protected $logs;
     protected $options;
 
-    public function __construct() {
+    public function __construct()
+    {
         // Instance dependences
         $this->logs    = new Autotwitter_Logs;
         $this->twitter = new Autotwitter_ApiTwitter;
@@ -24,21 +26,25 @@ Class Autotwitter_Publish {
     }
 
     /**
-    * Future to Publish Trigger
-    * @param WP_Post $post
-    */
-    public function autotwitter_publishFuture(\WP_Post $post): void {
+     * Future to Publish Trigger
+     *
+     * @param WP_Post $post
+     */
+    public function autotwitter_publishFuture(\WP_Post $post): void
+    {
         update_post_meta($post->ID, 'future_post_trigger', date('Y-m-d H:i:s'));
         $this->autotwitter_triggerTweet($post);
     }
 
     /**
-    *  When post pass to status Publish Triggers autopost
-    * @param int $post
-    * @param WP_Post $post
-    * @return void
-    */
-    public function autotwitter_publishPost(int $post_id, \WP_Post $post) {
+     *  When post pass to status Publish Triggers autopost
+     *
+     * @param  int     $post
+     * @param  WP_Post $post
+     * @return void
+     */
+    public function autotwitter_publishPost(int $post_id, \WP_Post $post)
+    {
         // Check if it's not triggered by gutemberg
         if(strpos($_SERVER['REQUEST_URI'], 'post.php') === false || !$_SERVER['REQUEST_METHOD'] === 'POST') {
             return;
@@ -53,11 +59,13 @@ Class Autotwitter_Publish {
     }
 
     /**
-    * Abstract function to trigger Tweet
-    * @param WP_Post $post
-    * @return void
-    */
-    public function autotwitter_triggerTweet(\WP_Post $post): void {
+     * Abstract function to trigger Tweet
+     *
+     * @param  WP_Post $post
+     * @return void
+     */
+    public function autotwitter_triggerTweet(\WP_Post $post): void
+    {
         // Checks for validations
         if(!$this->autotwitter_canPublish($post->ID, $post->post_type)) {
             return;
@@ -105,12 +113,14 @@ Class Autotwitter_Publish {
     }
 
     /**
-    * Checks any settings blocks for publish on tweet
-    * @param int $post_id
-    * @param string $post_type
-    * @return bool
-    */
-    public function autotwitter_canPublish(int $post_id, string $post_type): bool {
+     * Checks any settings blocks for publish on tweet
+     *
+     * @param  int    $post_id
+     * @param  string $post_type
+     * @return bool
+     */
+    public function autotwitter_canPublish(int $post_id, string $post_type): bool
+    {
 
         if(empty($post_id)) {
             return false;

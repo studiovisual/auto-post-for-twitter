@@ -4,10 +4,12 @@ namespace StudioVisual\Twitter\Models;
 
 use StudioVisual\Twitter\Autotwitter_App;
 
-class Autotwitter_Logs {
+class Autotwitter_Logs
+{
     protected $table;
 
-    public function __construct() {
+    public function __construct()
+    {
         global $wpdb;
 
         // Get slugified name from plugin
@@ -15,10 +17,12 @@ class Autotwitter_Logs {
     }
 
     /**
-    * Create Table Logs
-    * @return bool
-    */
-    public function autotwitter_createTable(): bool {
+     * Create Table Logs
+     *
+     * @return bool
+     */
+    public function autotwitter_createTable(): bool
+    {
         global $wpdb;
 
         // Check if Table Exists
@@ -49,23 +53,27 @@ class Autotwitter_Logs {
     }
 
     /**
-    * Drop Table
-    * @return bool
-    */
-    public function autotwitter_drop(): bool {
+     * Drop Table
+     *
+     * @return bool
+     */
+    public function autotwitter_drop(): bool
+    {
         global $wpdb;
 
         return $wpdb->query('DROP TABLE IF EXISTS ' . $this->table);
     }
 
     /**
-    * Add Logs
-    * @param int post_id
-    * @param string $status
-    * @param string $message
-    * @return bool
-    */
-    public function autotwitter_add(int $post_id, string $status, string $message): bool {
+     * Add Logs
+     *
+     * @param  int post_id
+     * @param  string      $status
+     * @param  string      $message
+     * @return bool
+     */
+    public function autotwitter_add(int $post_id, string $status, string $message): bool
+    {
         global $wpdb;
 
         if(!$post_id || !$message || !$status) {
@@ -85,10 +93,12 @@ class Autotwitter_Logs {
     }
 
     /**
-    * Truncate Logs
-    * @return void
-    */
-    public function autotwitter_truncate() {
+     * Truncate Logs
+     *
+     * @return void
+     */
+    public function autotwitter_truncate()
+    {
         global $wpdb;
 
         $query = "TRUNCATE TABLE " . $this->table;
@@ -96,11 +106,13 @@ class Autotwitter_Logs {
     }
 
     /**
-    * get Logs
-    * @param int $limit
-    * @return array
-    */
-    public function autotwitter_get(int $limit = 30): array {
+     * get Logs
+     *
+     * @param  int $limit
+     * @return array
+     */
+    public function autotwitter_get(int $limit = 30): array
+    {
         global $wpdb;
 
         $query = "SELECT * FROM " . $this->table . " ORDER BY id DESC LIMIT " . $limit . " ";

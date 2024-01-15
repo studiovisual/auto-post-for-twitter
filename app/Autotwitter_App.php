@@ -6,22 +6,26 @@ use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
 use StudioVisual\Twitter\Controllers\Autotwitter_Publish;
 use StudioVisual\Twitter\Models\Autotwitter_Logs;
 
-Class Autotwitter_App {
+Class Autotwitter_App
+{
     // Variables
     static $name   = 'Auto Post for Twitter';
     static $prefix = 'sv_';
 
-    public function __construct() {
+    public function __construct()
+    {
         // Instance dependences
         new Autotwitter_Admin;
         new Autotwitter_Publish;
     }
 
     /**
-    * Activate plugin
-    * @return void
-    */
-    public static function autotwitter_activate(): void {
+     * Activate plugin
+     *
+     * @return void
+     */
+    public static function autotwitter_activate(): void
+    {
         update_option('rewrite_rules', '');
 
         // Create Table Logs
@@ -30,18 +34,22 @@ Class Autotwitter_App {
     }
 
     /**
-    * Deactivate plugin
-    * @return void
-    */
-    public static function autotwitter_deactivate(): void {
+     * Deactivate plugin
+     *
+     * @return void
+     */
+    public static function autotwitter_deactivate(): void
+    {
         flush_rewrite_rules();
     }
 
     /**
-    * Uninstall plugin
-    * @return void
-    */
-    public static function autotwitter_uninstall(): void {
+     * Uninstall plugin
+     *
+     * @return void
+     */
+    public static function autotwitter_uninstall(): void
+    {
         // Remove options
         delete_option(self::autotwitter_getSlug('isactive'));
         delete_option(self::autotwitter_getSlug('consumerkey'));
@@ -58,18 +66,22 @@ Class Autotwitter_App {
     }
 
     /**
-    * Concat Key with prefix and name
-    * @return string
-    */
-    public static function autotwitter_getKey(string $key = ''): string {
+     * Concat Key with prefix and name
+     *
+     * @return string
+     */
+    public static function autotwitter_getKey(string $key = ''): string
+    {
         return str_replace('_', '-', $key . self::$prefix . sanitize_title(self::$name));
     }
 
     /**
-    * Format key to save options
-    * @return string
-    */
-    public static function autotwitter_getSlug(string $key = ''): string {
+     * Format key to save options
+     *
+     * @return string
+     */
+    public static function autotwitter_getSlug(string $key = ''): string
+    {
         return !empty($key) ? strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)) . '_' . $key) : strtolower(self::$prefix . str_replace('-', '_', sanitize_title(self::$name)));
     }
 }
