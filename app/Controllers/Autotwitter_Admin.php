@@ -1,12 +1,35 @@
 <?php
+/**
+ * Class Admin Auto Twitter
+ * Admin plugin
+ * php version 8.0
+ *
+ * @category Class
+ * @package  Autotwitter_Admin
+ * @author   Studio Visual <atendimento@studiovisual.com.br>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.studiovisual.com.br
+ */
 
 namespace StudioVisual\Twitter\Controllers;
 
 use StudioVisual\Twitter\Autotwitter_App;
 use StudioVisual\Twitter\Models\Autotwitter_Logs;
 
+/**
+ * AutoTwitter Admin Class
+ *
+ * @category Class
+ * @package  Autotwitter_Admin
+ * @author   Studio Visual <atendimento@studiovisual.com.br>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.studiovisual.com.br
+ */
 Class Autotwitter_Admin
 {
+    /**
+     * Construct 
+     */
     public function __construct()
     {
         // Hook to create admin menu

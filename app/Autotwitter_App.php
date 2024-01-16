@@ -1,7 +1,7 @@
 <?php
 /**
  * Class App Auto Twitter
- * View of logs
+ * App of plugin
  * php version 8.0
  *
  * @category Class
