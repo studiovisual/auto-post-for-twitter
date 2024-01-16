@@ -1,13 +1,36 @@
 <?php
+/**
+ * Class Logs Auto Twitter
+ * View of logs
+ * php version 8.0
+ *
+ * @category Class
+ * @package  Autotwitter_Logs
+ * @author   Studio Visual <atendimento@studiovisual.com.br>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.studiovisual.com.br
+ */
 
 namespace StudioVisual\Twitter\Models;
 
 use StudioVisual\Twitter\Autotwitter_App;
 
+/**
+ * AutoTwitter Logs Class
+ *
+ * @category Class
+ * @package  Autotwitter_Logs
+ * @author   Studio Visual <atendimento@studiovisual.com.br>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.studiovisual.com.br
+ */
 class Autotwitter_Logs
 {
     protected $table;
 
+    /**
+     * Construct 
+     */
     public function __construct()
     {
         global $wpdb;
@@ -21,7 +44,7 @@ class Autotwitter_Logs
      *
      * @return bool
      */
-    public function autotwitter_createTable(): bool
+    public function autotwitter_createTable(): bool //phpcs:ignore
     {
         global $wpdb;
 
@@ -29,7 +52,7 @@ class Autotwitter_Logs
         $check = $wpdb->query("SHOW TABLES LIKE '" . $this->table . "'");
 
         // If table not exists create it
-        if(!$check) {
+        if (!$check) {
             $query = "CREATE TABLE `" . $this->table . "` (
                 `id` INT NOT NULL AUTO_INCREMENT,
                 `post_id` INT NULL,
@@ -41,12 +64,15 @@ class Autotwitter_Logs
             // Create Table via Query
             $create = $wpdb->query($query);
 
-            if(!$create) {
+            if (!$create) {
                 return false;
             }
 
             // Add version
-            add_option(Autotwitter_App::autotwitter_getSlug('dbversion'), STUDIO_TWITTER_VERSION);
+            add_option(
+                Autotwitter_App::autotwitter_getSlug('dbversion'), 
+                STUDIO_TWITTER_VERSION
+            );
         }
 
         return true;
@@ -57,7 +83,7 @@ class Autotwitter_Logs
      *
      * @return bool
      */
-    public function autotwitter_drop(): bool
+    public function autotwitter_drop(): bool //phpcs:ignore
     {
         global $wpdb;
 
@@ -67,16 +93,17 @@ class Autotwitter_Logs
     /**
      * Add Logs
      *
-     * @param  int post_id
-     * @param  string      $status
-     * @param  string      $message
+     * @param int    $post_id post_id
+     * @param string $status  status
+     * @param string $message message
+     * 
      * @return bool
      */
-    public function autotwitter_add(int $post_id, string $status, string $message): bool
+    public function autotwitter_add(int $post_id, string $status, string $message): bool //phpcs:ignore	
     {
         global $wpdb;
 
-        if(!$post_id || !$message || !$status) {
+        if (!$post_id || !$message || !$status) {
             return false;
         }
 
@@ -93,11 +120,11 @@ class Autotwitter_Logs
     }
 
     /**
-     * Truncate Logs
+     * Truncate logs
      *
      * @return void
      */
-    public function autotwitter_truncate()
+    public function autotwitter_truncate() //phpcs:ignore
     {
         global $wpdb;
 
@@ -106,16 +133,20 @@ class Autotwitter_Logs
     }
 
     /**
-     * get Logs
+     * Get logs
      *
-     * @param  int $limit
+     * @param int $limit limite de logs
+     * 
      * @return array
      */
-    public function autotwitter_get(int $limit = 30): array
+    public function autotwitter_get(int $limit = 30): array //phpcs:ignore
     {
         global $wpdb;
 
-        $query = "SELECT * FROM " . $this->table . " ORDER BY id DESC LIMIT " . $limit . " ";
+        $query = "
+            SELECT * FROM " . $this->table . " 
+            ORDER BY id DESC 
+            LIMIT " . $limit . " ";
         $logs = $wpdb->get_results($query, ARRAY_A);
 
         return !empty($logs) ? $logs : [];

@@ -1,5 +1,5 @@
 <p class="helper"><?php echo _e('Selecione as categorias que você <strong>não</strong> quer que sejam publicadas automaticamente no twitter', 'sv-twitter'); ?></p>
-<?php if(!empty($categories)) { ?>
+<?php if (!empty($categories)) { ?>
     <div class="categories">
         <ul>
             <?php foreach ($categories as $category) { ?>

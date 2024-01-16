@@ -19,7 +19,7 @@ Class Autotwitter_Publish
         $this->twitter = new Autotwitter_ApiTwitter;
 
         // Add hook only if options is active
-        if(Autotwitter_Admin::autotwitter_isActive()) {
+        if (Autotwitter_Admin::autotwitter_isActive()) {
             add_action('future_to_publish', [$this, 'autotwitter_publishFuture']);
             add_action('save_post',         [$this, 'autotwitter_publishPost'], 10, 2);
         }
@@ -46,12 +46,12 @@ Class Autotwitter_Publish
     public function autotwitter_publishPost(int $post_id, \WP_Post $post)
     {
         // Check if it's not triggered by gutemberg
-        if(strpos($_SERVER['REQUEST_URI'], 'post.php') === false || !$_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (strpos($_SERVER['REQUEST_URI'], 'post.php') === false || !$_SERVER['REQUEST_METHOD'] === 'POST') {
             return;
         }
 
         // Only post status publish
-        if($post->post_status !== 'publish') {
+        if ($post->post_status !== 'publish') {
             return;
         }
 
@@ -67,7 +67,7 @@ Class Autotwitter_Publish
     public function autotwitter_triggerTweet(\WP_Post $post): void
     {
         // Checks for validations
-        if(!$this->autotwitter_canPublish($post->ID, $post->post_type)) {
+        if (!$this->autotwitter_canPublish($post->ID, $post->post_type)) {
             return;
         }
 
@@ -88,11 +88,11 @@ Class Autotwitter_Publish
             // Create Tweet
             $publish = $this->twitter->autotwitter_createTweet($post->ID, $message);
 
-            if(!empty($publish)) {
+            if (!empty($publish)) {
                 // Setup Message Log
                 $log = '[' . $post->ID . '] ' . $title . ' | Response API: [' . $publish['code'] . '] - ' . $publish['body'];
 
-                if($publish['code'] === 201 || $publish['code'] === 200) {
+                if ($publish['code'] === 201 || $publish['code'] === 200) {
                     // Success
                     $this->logs->autotwitter_add($post->ID, __('sucesso', 'sv-twitter'), $log);
 
@@ -122,12 +122,12 @@ Class Autotwitter_Publish
     public function autotwitter_canPublish(int $post_id, string $post_type): bool
     {
 
-        if(empty($post_id)) {
+        if (empty($post_id)) {
             return false;
         }
 
         // Check if Tweet is already published
-        if(!empty(get_post_meta($post_id, 'twitter_published'))) {
+        if (!empty(get_post_meta($post_id, 'twitter_published'))) {
             return false;
         }
 
@@ -137,12 +137,12 @@ Class Autotwitter_Publish
         $has_categories     = array_intersect($post_categories, $twitter_categories);
 
         // If there's a blocked categorie skip tweet
-        if(!empty($has_categories)) {
+        if (!empty($has_categories)) {
             // Variable Categories
             $cats = [];
 
             // Looks for category name
-            foreach($has_categories as $cat) {
+            foreach ($has_categories as $cat) {
                 $cats[] = get_the_category_by_ID($cat);
             }
 
@@ -156,7 +156,7 @@ Class Autotwitter_Publish
         $settingsPostTypes = !empty($pt = Autotwitter_Admin::autotwitter_getSettings()['postTypes']) ? $pt : [];
 
         // Checks if post type not in settings
-        if(!in_array($post_type, $settingsPostTypes)) {
+        if (!in_array($post_type, $settingsPostTypes)) {
             $message = __('Não enviado por estar em tipo de post bloqueado | Tipo de post:', 'sv-twitter');
             $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . $post_type;
             $this->logs->autotwitter_add($post_id, __('falhou', 'sv-twitter'), $log);

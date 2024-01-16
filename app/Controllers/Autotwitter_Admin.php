@@ -114,7 +114,7 @@ Class Autotwitter_Admin
     public function autotwitter_logs(): void
     {
         // Clear the logs
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // clear logs
             $this->logs->autotwitter_truncate();
         }
@@ -344,7 +344,7 @@ Class Autotwitter_Admin
     public function autotwitter_validatePostTypes($value)
     {
         // Check if is empty
-        if(empty($value)) {
+        if (empty($value)) {
             // add validation error
             add_settings_error(
                 Autotwitter_App::autotwitter_getSlug('errors'),
@@ -375,7 +375,7 @@ Class Autotwitter_Admin
         $value = sanitize_text_field($value);
 
         // Check if is empty
-        if(empty($value)) {
+        if (empty($value)) {
             // add validation error
             add_settings_error(
                 Autotwitter_App::autotwitter_getSlug('errors'),
@@ -408,7 +408,7 @@ Class Autotwitter_Admin
             return;
         }
 
-        if(isset($_GET[ 'page' ])
+        if (isset($_GET[ 'page' ])
             && Autotwitter_App::autotwitter_getKey() == $_GET[ 'page' ]
             && isset($_GET[ 'settings-updated' ])
             && true == $_GET[ 'settings-updated' ]
@@ -422,7 +422,7 @@ Class Autotwitter_Admin
             <?php
         }
 
-        if(isset($_GET[ 'page' ])
+        if (isset($_GET[ 'page' ])
             && Autotwitter_App::autotwitter_getKey('logs_') == $_GET[ 'page' ]
             && $_SERVER['REQUEST_METHOD'] === 'POST'
             && !empty($_POST['clear'])
@@ -449,7 +449,7 @@ Class Autotwitter_Admin
         // Check if plugin is active and post types is checked
         $settings = self::autotwitter_getSettings();
 
-        if(empty($settings['isActive']) || (!empty($settings['isActive']) && !in_array($post_type, $settings['postTypes']))) {
+        if (empty($settings['isActive']) || (!empty($settings['isActive']) && !in_array($post_type, $settings['postTypes']))) {
             return;
         }
 
@@ -500,11 +500,11 @@ Class Autotwitter_Admin
         $newTitle      = $slug . '_title';
 
         // Check if our nonce is set.
-        if(!isset($_POST[$active])) {
+        if (!isset($_POST[$active])) {
             return $post_id;
         }
 
-        if(empty($_POST[$nonce_field])) {
+        if (empty($_POST[$nonce_field])) {
             return $post_id;
         }
 
@@ -512,12 +512,12 @@ Class Autotwitter_Admin
         $nonce = sanitize_text_field(wp_unslash($_POST[$nonce_field]));
 
         // Verify that the nonce is valid.
-        if(!wp_verify_nonce($nonce, $nonce_action)) {
+        if (!wp_verify_nonce($nonce, $nonce_action)) {
             return $post_id;
         }
 
         // Skip on auto save
-        if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return $post_id;
         }
 
@@ -555,7 +555,7 @@ Class Autotwitter_Admin
     public static function autotwitter_isActive()
     {
 
-        if(empty(self::autotwitter_getSettings()['consumerKey']) 
+        if (empty(self::autotwitter_getSettings()['consumerKey']) 
             || empty(self::autotwitter_getSettings()['consumerSecret']) 
             || empty(self::autotwitter_getSettings()['tokenKey']) 
             || empty(self::autotwitter_getSettings()['tokenSecret']) 

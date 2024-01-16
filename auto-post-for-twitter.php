@@ -21,7 +21,7 @@ if (! defined('ABSPATH') ) {
 require __DIR__.'/vendor/autoload.php';
 
 
-if(class_exists('StudioVisual\Twitter\Autotwitter_App')) {
+if (class_exists('StudioVisual\Twitter\Autotwitter_App')) {
     // Define Constants
     define('STUDIO_TWITTER_VERSION', '1.0.0');
     define('STUDIO_TWITTER_PLUGIN_DIR', plugin_dir_path(__FILE__));
