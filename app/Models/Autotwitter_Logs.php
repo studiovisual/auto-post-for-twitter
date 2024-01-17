@@ -49,17 +49,21 @@ class Autotwitter_Logs
         global $wpdb;
 
         // Check if Table Exists
-        $check = $wpdb->query("SHOW TABLES LIKE '" . $this->table . "'");
+        $sql = $wpdb->prepare("SHOW TABLES LIKE %s", $this->table);
+        $check = $wpdb->query($sql);
 
         // If table not exists create it
         if (!$check) {
-            $query = "CREATE TABLE `" . $this->table . "` (
+            // Prepare SQL query
+            $query = $wpdb->prepare("
+                CREATE TABLE `%s` (
                 `id` INT NOT NULL AUTO_INCREMENT,
                 `post_id` INT NULL,
                 `date` DATETIME NULL,
                 `status` VARCHAR(50) NULL,
                 `message` VARCHAR(255) NULL,
-                PRIMARY KEY (`id`));";
+                PRIMARY KEY (`id`));
+            ", $this->table);
 
             // Create Table via Query
             $create = $wpdb->query($query);
@@ -86,8 +90,9 @@ class Autotwitter_Logs
     public function autotwitter_drop(): bool //phpcs:ignore
     {
         global $wpdb;
+        $query = $wpdb->prepare("DROP TABLE IF EXISTS %s", $this->table);
 
-        return $wpdb->query('DROP TABLE IF EXISTS ' . $this->table);
+        return $wpdb->query($query);
     }
 
     /**
@@ -128,7 +133,7 @@ class Autotwitter_Logs
     {
         global $wpdb;
 
-        $query = "TRUNCATE TABLE " . $this->table;
+        $query    = $wpdb->prepare("TRUNCATE TABLE %s" , $this->table);
         $truncate = $wpdb->query($query);
     }
 
@@ -143,10 +148,10 @@ class Autotwitter_Logs
     {
         global $wpdb;
 
-        $query = "
-            SELECT * FROM " . $this->table . " 
-            ORDER BY id DESC 
-            LIMIT " . $limit . " ";
+        $query = $wpdb->prepare(
+            "SELECT * FROM %s ORDER BY id DESC LIMIT %s ",
+            [$this->table, $limit]
+        );
         $logs = $wpdb->get_results($query, ARRAY_A);
 
         return !empty($logs) ? $logs : [];

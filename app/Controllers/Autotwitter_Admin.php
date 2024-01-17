@@ -464,6 +464,8 @@ Class Autotwitter_Admin
             && Autotwitter_App::autotwitter_getKey('logs_') == $_GET[ 'page' ]
             && $_SERVER['REQUEST_METHOD'] === 'POST'
             && !empty($_POST['clear'])
+            && !empty($_POST['clear_nonce'])
+            && wp_verify_nonce(sanitize_text_field($_POST['clear_nonce']), 'clear_logs') //phpcs:ignore
         ) {
             ?>
                 <div class="notice notice-success is-dismissible">

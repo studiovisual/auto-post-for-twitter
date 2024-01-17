@@ -37,6 +37,7 @@
     <?php if (!empty($logs)) { ?>
         <form method="post" action="">
             <input type="hidden" name="clear" id="clear" value="clear" />
+            <input type="hidden" name="clear_nonce" id="clear_nonce" value="<?php echo wp_create_nonce( 'clear_logs')  ?>" />
             <button class="clear-logs button">
                 <?php echo _e('Limpar Logs', 'sv-twitter'); ?>
             </button>

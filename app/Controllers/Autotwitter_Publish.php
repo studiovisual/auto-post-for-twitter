@@ -101,15 +101,23 @@ Class Autotwitter_Publish
         }
 
         // Setup variables
-        $slug      = Autotwitter_App::autotwitter_getSlug();
-        $active    = $slug . '_active';
-        $newTitle  = $slug . '_title';
-        $auto_post = !empty($_POST[$active]) ? sanitize_text_field($_POST[$active]) : get_post_meta($post->ID, $active, true); //phpcs:ignore
+        $slug       = Autotwitter_App::autotwitter_getSlug();        
+        $meta_nonce = sanitize_text_field($_POST['sv_auto_post_for_twitter_nonce_field']);
+
+        // Check if nonce is OK
+        if (!wp_verify_nonce($meta_nonce, $slug . '_nonce_action')) {
+            return;
+        }
+        
+        // Variables
+        $active     = $slug . '_active';
+        $newTitle   = $slug . '_title';
+        $auto_post  = !empty($_POST[$active]) && wp_verify_nonce($meta_nonce, $slug . '_nonce_action') ? sanitize_text_field($_POST[$active]) : get_post_meta($post->ID, $active, true); //phpcs:ignore
 
         // Check if auto post is ready to publish
         if ($auto_post == 'yes' || $auto_post == '') {
             // Format Message
-            $title   = !empty($_POST[$newTitle]) ? sanitize_text_field($_POST[$newTitle]) : get_post_meta($post->ID, $newTitle, true); //phpcs:ignore
+            $title   = !empty($_POST[$newTitle]) && wp_verify_nonce($meta_nonce, $slug . '_nonce_action') ? sanitize_text_field($_POST[$newTitle]) : get_post_meta($post->ID, $newTitle, true); //phpcs:ignore
             $title   = !empty($title) ? $title : strip_tags(get_the_title($post->ID)); //phpcs:ignore
             $link    = get_permalink($post->ID);
             $message = $title . ' ' . $link;
