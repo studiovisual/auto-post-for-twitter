@@ -2,7 +2,7 @@
 /**
  * Log view file
  * View of logs
- * php version 8.0
+ * php version 8.1
  *
  * @category File
  * @package  Logs_Auto_Post_For_Twitter

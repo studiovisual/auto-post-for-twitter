@@ -2,7 +2,7 @@
 /**
  * Class Logs Auto Twitter
  * View of logs
- * php version 8.0
+ * php version 8.1
  *
  * @category Class
  * @package  Autotwitter_Logs

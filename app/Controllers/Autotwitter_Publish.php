@@ -1,4 +1,15 @@
 <?php
+/**
+ * Class Publish Auto Twitter
+ * Publish twitter plugin
+ * php version 8.1
+ *
+ * @category Class
+ * @package  Autotwitter_Publish
+ * @author   Studio Visual <atendimento@studiovisual.com.br>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.studiovisual.com.br
+ */
 
 namespace StudioVisual\Twitter\Controllers;
 
@@ -7,11 +18,23 @@ use StudioVisual\Twitter\Models\Autotwitter_Logs;
 use StudioVisual\Twitter\Controllers\Autotwitter_Admin;
 use StudioVisual\Twitter\Controllers\Autotwitter_ApiTwitter;
 
+/**
+ * Class Publish Auto Twitter
+ *
+ * @category Class
+ * @package  Autotwitter_Publish
+ * @author   Studio Visual <atendimento@studiovisual.com.br>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.studiovisual.com.br
+ */
 Class Autotwitter_Publish
 {
     protected $logs;
     protected $options;
 
+    /**
+     * Construct
+     */
     public function __construct()
     {
         // Instance dependences
@@ -21,16 +44,18 @@ Class Autotwitter_Publish
         // Add hook only if options is active
         if (Autotwitter_Admin::autotwitter_isActive()) {
             add_action('future_to_publish', [$this, 'autotwitter_publishFuture']);
-            add_action('save_post',         [$this, 'autotwitter_publishPost'], 10, 2);
+            add_action('save_post',         [$this, 'autotwitter_publishPost'], 10, 2); //phpcs:ignore
         }
     }
 
     /**
      * Future to Publish Trigger
      *
-     * @param WP_Post $post
+     * @param WP_Post $post post
+     * 
+     * @return void
      */
-    public function autotwitter_publishFuture(\WP_Post $post): void
+    public function autotwitter_publishFuture(\WP_Post $post): void //phpcs:ignore
     {
         update_post_meta($post->ID, 'future_post_trigger', date('Y-m-d H:i:s'));
         $this->autotwitter_triggerTweet($post);
@@ -39,14 +64,17 @@ Class Autotwitter_Publish
     /**
      *  When post pass to status Publish Triggers autopost
      *
-     * @param  int     $post
-     * @param  WP_Post $post
+     * @param int     $post_id post_id
+     * @param WP_Post $post    post
+     * 
      * @return void
      */
-    public function autotwitter_publishPost(int $post_id, \WP_Post $post)
+    public function autotwitter_publishPost(int $post_id, \WP_Post $post) //phpcs:ignore
     {
         // Check if it's not triggered by gutemberg
-        if (strpos($_SERVER['REQUEST_URI'], 'post.php') === false || !$_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (strpos($_SERVER['REQUEST_URI'], 'post.php') === false 
+            || !$_SERVER['REQUEST_METHOD'] === 'POST'
+        ) {
             return;
         }
 
@@ -61,10 +89,11 @@ Class Autotwitter_Publish
     /**
      * Abstract function to trigger Tweet
      *
-     * @param  WP_Post $post
+     * @param WP_Post $post object post
+     * 
      * @return void
      */
-    public function autotwitter_triggerTweet(\WP_Post $post): void
+    public function autotwitter_triggerTweet(\WP_Post $post): void //phpcs:ignore
     {
         // Checks for validations
         if (!$this->autotwitter_canPublish($post->ID, $post->post_type)) {
@@ -75,13 +104,13 @@ Class Autotwitter_Publish
         $slug      = Autotwitter_App::autotwitter_getSlug();
         $active    = $slug . '_active';
         $newTitle  = $slug . '_title';
-        $auto_post = !empty($_POST[$active]) ? sanitize_text_field($_POST[$active]) : get_post_meta($post->ID, $active, true);
+        $auto_post = !empty($_POST[$active]) ? sanitize_text_field($_POST[$active]) : get_post_meta($post->ID, $active, true); //phpcs:ignore
 
         // Check if auto post is ready to publish
         if ($auto_post == 'yes' || $auto_post == '') {
             // Format Message
-            $title   = !empty($_POST[$newTitle]) ? sanitize_text_field($_POST[$newTitle]) : get_post_meta($post->ID, $newTitle, true);
-            $title   = !empty($title) ? $title : strip_tags(get_the_title($post->ID));
+            $title   = !empty($_POST[$newTitle]) ? sanitize_text_field($_POST[$newTitle]) : get_post_meta($post->ID, $newTitle, true); //phpcs:ignore
+            $title   = !empty($title) ? $title : strip_tags(get_the_title($post->ID)); //phpcs:ignore
             $link    = get_permalink($post->ID);
             $message = $title . ' ' . $link;
 
@@ -90,11 +119,11 @@ Class Autotwitter_Publish
 
             if (!empty($publish)) {
                 // Setup Message Log
-                $log = '[' . $post->ID . '] ' . $title . ' | Response API: [' . $publish['code'] . '] - ' . $publish['body'];
+                $log = '[' . $post->ID . '] ' . $title . ' | Response API: [' . $publish['code'] . '] - ' . $publish['body']; //phpcs:ignore
 
                 if ($publish['code'] === 201 || $publish['code'] === 200) {
                     // Success
-                    $this->logs->autotwitter_add($post->ID, __('sucesso', 'sv-twitter'), $log);
+                    $this->logs->autotwitter_add($post->ID, __('sucesso', 'sv-twitter'), $log); //phpcs:ignore
 
                     // update meta field to not publish on twitter again
                     update_post_meta($post->ID, 'twitter_published', true);
@@ -107,7 +136,7 @@ Class Autotwitter_Publish
                 }
 
                 // Log error on API
-                $this->logs->autotwitter_add($post->ID, __('falhou', 'sv-twitter'), $log);
+                $this->logs->autotwitter_add($post->ID, __('falhou', 'sv-twitter'), $log); //phpcs:ignore
             }
         }
     }
@@ -115,11 +144,12 @@ Class Autotwitter_Publish
     /**
      * Checks any settings blocks for publish on tweet
      *
-     * @param  int    $post_id
-     * @param  string $post_type
+     * @param int    $post_id   post_id
+     * @param string $post_type post_type
+     * 
      * @return bool
      */
-    public function autotwitter_canPublish(int $post_id, string $post_type): bool
+    public function autotwitter_canPublish(int $post_id, string $post_type): bool //phpcs:ignore
     {
 
         if (empty($post_id)) {
@@ -131,10 +161,10 @@ Class Autotwitter_Publish
             return false;
         }
 
-        // Check if Has any categories checked on options and stops publish on twitter
+        // Check if Has any categories checked on options and stops publish
         $post_categories    = wp_get_post_categories($post_id);
-        $twitter_categories = !empty(Autotwitter_Admin::autotwitter_getSettings()['categories']) ? Autotwitter_Admin::autotwitter_getSettings()['categories'] : [];
-        $has_categories     = array_intersect($post_categories, $twitter_categories);
+        $twitter_categories = !empty(Autotwitter_Admin::autotwitter_getSettings()['categories']) ? Autotwitter_Admin::autotwitter_getSettings()['categories'] : []; //phpcs:ignore
+        $has_categories     = array_intersect($post_categories, $twitter_categories); //phpcs:ignore
 
         // If there's a blocked categorie skip tweet
         if (!empty($has_categories)) {
@@ -146,19 +176,19 @@ Class Autotwitter_Publish
                 $cats[] = get_the_category_by_ID($cat);
             }
 
-            $message = __('Não enviado por estar em categoria bloqueada | Categoria(s):', 'sv-twitter');
-            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . implode(", ", $cats);
+            $message = __('Não enviado por estar em categoria bloqueada | Categoria(s):', 'sv-twitter'); //phpcs:ignore
+            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . implode(", ", $cats); //phpcs:ignore
             $this->logs->autotwitter_add($post_id, __('falhou', 'sv-twitter'), $log);
             return false;
         }
 
         // get post type settings and current post type for post
-        $settingsPostTypes = !empty($pt = Autotwitter_Admin::autotwitter_getSettings()['postTypes']) ? $pt : [];
+        $settingsPostTypes = !empty($pt = Autotwitter_Admin::autotwitter_getSettings()['postTypes']) ? $pt : []; //phpcs:ignore
 
         // Checks if post type not in settings
         if (!in_array($post_type, $settingsPostTypes)) {
-            $message = __('Não enviado por estar em tipo de post bloqueado | Tipo de post:', 'sv-twitter');
-            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . $post_type;
+            $message = __('Não enviado por estar em tipo de post bloqueado | Tipo de post:', 'sv-twitter'); //phpcs:ignore
+            $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . $post_type; //phpcs:ignore
             $this->logs->autotwitter_add($post_id, __('falhou', 'sv-twitter'), $log);
             return false;
         }

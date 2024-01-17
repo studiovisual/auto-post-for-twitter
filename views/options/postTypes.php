@@ -2,7 +2,7 @@
 /**
  * Log view file
  * Post Types
- * php version 8.0
+ * php version 8.1
  *
  * @category File
  * @package  PostTypes_Auto_Post_For_Twitter
