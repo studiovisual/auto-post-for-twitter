@@ -1,2 +1,3 @@
 <?php
-// Silence is golden.
+//phpcs:disabled
+/** Silence is golden. */

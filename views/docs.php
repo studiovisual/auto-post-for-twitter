@@ -1,3 +1,18 @@
+<?php 
+/**
+ * Docs
+ * Docs of plugin
+ * php version 8.1
+ *
+ * @category File
+ * @package  Docs_Auto_Post_For_Twitter
+ * @author   Studio Visual <atendimento@studiovisual.com.br>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.studiovisual.com.br
+ */
+
+ //phpcs:disable
+?>
 <div class="wrap sv-plugin docs">
     <h1><?php echo _e('Como obter acesso à API do Twitter', 'sv-twitter'); ?></h1>
     
