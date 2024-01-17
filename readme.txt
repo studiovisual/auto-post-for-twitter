@@ -4,7 +4,7 @@ Donate link: https://studiovisual.com.br/
 Tags:  twitter, wp twitter auto publish, twitter auto publish, publish post to twitter, add link to twitter, twitter publishing, post to twitter, social media auto publish, social media publishing, social network auto publish, social media, social network
 Requires PHP: 7.4
 Requires at least: 3.0
-Tested up to: 6.2.2
+Tested up to: 6.4
 Stable tag: 1.0.0
 License: GPLv2 or later
 
@@ -50,6 +50,18 @@ You can specify the categories which you want to exclude from auto publish from 
 = 3. Could a post be publish more than one time ? =
 
 No, Auto Post for Twitter blocks to send the same post more than once.
+
+== Third-Party Service Usage ==
+Our plugin leverages the Twitter API for its core functionality. This integration enables users to automatically publish WordPress posts to their Twitter account.
+
+= How It Works = 
+The plugin uses the Twitter API whenever a user opts to publish or schedule a WordPress post for Twitter.
+Data Handling: We ensure that all data transmitted to Twitter adheres to both our privacy policy and Twitter's guidelines.
+
+= Twitter API Details = 
+[Service Link](https://api.twitter.com)
+[Twitter Policy](https://developer.twitter.com/en/developer-terms/policy#:~:text=You%20may%20not%20use%20development,access%20credentials%20owned%20by%20others)
+[Endpoint Tweet](https://api.twitter.com/2/tweets)
 
 == Screenshots ==
 
