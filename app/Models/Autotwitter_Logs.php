@@ -149,7 +149,7 @@ class Autotwitter_Logs
         global $wpdb;
 
         $query = $wpdb->prepare(
-            "SELECT * FROM %s ORDER BY id DESC LIMIT %s ",
+            "SELECT * FROM {$this->table} ORDER BY id DESC LIMIT %d ",
             [$this->table, $limit]
         );
         $logs = $wpdb->get_results($query, ARRAY_A);
