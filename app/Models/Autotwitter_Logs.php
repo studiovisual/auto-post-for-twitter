@@ -15,6 +15,8 @@ namespace StudioVisual\Twitter\Models;
 
 use StudioVisual\Twitter\Autotwitter_App;
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
  * AutoTwitter Logs Class
  *
@@ -24,37 +26,39 @@ use StudioVisual\Twitter\Autotwitter_App;
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @link     http://www.studiovisual.com.br
  */
-class Autotwitter_Logs {
+class Autotwitter_Logs
+{
 
-	protected $table;
+    protected $table;
 
-	/**
-	 * Construct
-	 */
-	public function __construct() {
-		global $wpdb;
+    /**
+     * Construct
+     */
+    public function __construct()
+    {
+        global $wpdb;
 
-		// Get slugified name from plugin
-		$this->table = $wpdb->prefix . Autotwitter_App::autotwitter_getSlug( 'logs' );
-	}
+        // Get slugified name from plugin
+        $this->table = $wpdb->prefix . Autotwitter_App::autotwitter_getSlug('logs');
+    }
 
-	/**
-	 * Create Table Logs
-	 *
-	 * @return bool
-	 */
+    /**
+     * Create Table Logs
+     *
+     * @return bool
+     */
     public function autotwitter_createTable(): bool { //phpcs:ignore
-		global $wpdb;
+        global $wpdb;
 
-		// Check if Table Exists
-		$sql   = $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->table );
-		$check = $wpdb->query( $sql );
+        // Check if Table Exists
+        $sql   = $wpdb->prepare('SHOW TABLES LIKE %s', $this->table);
+        $check = $wpdb->query($sql);
 
-		// If table not exists create it
-		if ( ! $check ) {
-			// Prepare SQL query
-			$query = $wpdb->prepare(
-				'
+        // If table not exists create it
+        if (! $check ) {
+            // Prepare SQL query
+            $query = $wpdb->prepare(
+                '
                 CREATE TABLE `%s` (
                 `id` INT NOT NULL AUTO_INCREMENT,
                 `post_id` INT NULL,
@@ -63,94 +67,95 @@ class Autotwitter_Logs {
                 `message` VARCHAR(255) NULL,
                 PRIMARY KEY (`id`));
             ',
-				$this->table
-			);
+                $this->table
+            );
 
-			// Create Table via Query
-			$create = $wpdb->query( $query );
+            // Create Table via Query
+            $create = $wpdb->query($query);
 
-			if ( ! $create ) {
-				return false;
-			}
+            if (! $create ) {
+                return false;
+            }
 
-			// Add version
-			add_option(
-				Autotwitter_App::autotwitter_getSlug( 'dbversion' ),
-				STUDIO_TWITTER_VERSION
-			);
-		}
+            // Add version
+            add_option(
+                Autotwitter_App::autotwitter_getSlug('dbversion'),
+                STUDIO_TWITTER_VERSION
+            );
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * Drop Table
-	 *
-	 * @return bool
-	 */
+    /**
+     * Drop Table
+     *
+     * @return bool
+     */
     public function autotwitter_drop(): bool { //phpcs:ignore
-		global $wpdb;
-		$query = $wpdb->prepare( 'DROP TABLE IF EXISTS %s', $this->table );
+        global $wpdb;
+        $query = $wpdb->prepare('DROP TABLE IF EXISTS %s', $this->table);
 
-		return $wpdb->query( $query );
-	}
+        return $wpdb->query($query);
+    }
 
-	/**
-	 * Add Logs
-	 *
-	 * @param int    $post_id post_id
-	 * @param string $status  status
-	 * @param string $message message
-	 *
-	 * @return bool
-	 */
+    /**
+     * Add Logs
+     *
+     * @param int    $post_id post_id
+     * @param string $status  status
+     * @param string $message message
+     *
+     * @return bool
+     */
     public function autotwitter_add(int $post_id, string $status, string $message): bool { //phpcs:ignore	
-		global $wpdb;
+        global $wpdb;
 
-		if ( ! $post_id || ! $message || ! $status ) {
-			return false;
-		}
+        if (! $post_id || ! $message || ! $status ) {
+            return false;
+        }
 
-		$data = array(
-			'post_id' => $post_id,
-			'date'    => current_time( 'mysql' ),
-			'status'  => $status,
-			'message' => $message,
-		);
+        $data = array(
+        'post_id' => $post_id,
+        'date'    => current_time('mysql'),
+        'status'  => $status,
+        'message' => $message,
+        );
 
-		$check = $wpdb->insert( $this->table, $data );
+        $check = $wpdb->insert($this->table, $data);
 
-		return ! empty( $check ) ? true : false;
-	}
+        return ! empty($check) ? true : false;
+    }
 
-	/**
-	 * Truncate logs
-	 *
-	 * @return void
-	 */
+    /**
+     * Truncate logs
+     *
+     * @return void
+     */
     public function autotwitter_truncate() { //phpcs:ignore
-		global $wpdb;
+        global $wpdb;
 
-		$query    = $wpdb->prepare( 'TRUNCATE TABLE %s', $this->table );
-		$truncate = $wpdb->query( $query );
-	}
+        $query    = $wpdb->prepare('TRUNCATE TABLE %s', $this->table);
+        $truncate = $wpdb->query($query);
+    }
 
-	/**
-	 * Get logs
-	 *
-	 * @param int $limit limite de logs
-	 *
-	 * @return array
-	 */
+    /**
+     * Get logs
+     *
+     * @param int $limit limite de logs
+     *
+     * @return array
+     */
     public function autotwitter_get(int $limit = 30): array { //phpcs:ignore
-		global $wpdb;
+        global $wpdb;
 
-		$query = $wpdb->prepare(
-			"SELECT * FROM {$this->table} ORDER BY id DESC LIMIT %d ",
-			array( $this->table, $limit )
-		);
-		$logs  = $wpdb->get_results( $query, ARRAY_A );
+        $query = $wpdb->prepare(
+            "SELECT * FROM {$this->table} ORDER BY id DESC LIMIT %d ",
+            array($limit)
+        );
 
-		return ! empty( $logs ) ? $logs : array();
-	}
+        $logs  = $wpdb->get_results($query, ARRAY_A);
+
+        return ! empty($logs) ? $logs : array();
+    }
 }

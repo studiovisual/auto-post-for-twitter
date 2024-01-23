@@ -61,8 +61,8 @@ msgid "Categorias"
 msgstr "Categories"
 
 #: app/Controllers/Autotwitter_Admin.php:351
-msgid "Você precisa preencher o campo "
-msgstr "You need to fill the field "
+msgid "Você precisa preencher o campo %s"
+msgstr "You need to fill the field %s"
 
 #: app/Controllers/Autotwitter_Admin.php:386 views/logs.php:7
 msgid "Suas opções foram salvas."
