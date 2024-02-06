@@ -80,7 +80,7 @@ class Autotwitter_Logs
             // Add version
             add_option(
                 Autotwitter_App::autotwitter_getSlug('dbversion'),
-                AUTOTWITTER__VERSION
+                AUTOTWITTER_VERSION
             );
         }
 
