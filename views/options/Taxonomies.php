@@ -14,7 +14,7 @@
  if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  
 ?>
-<p class="helper"><?php echo _e('Selecione as categorias que você *não* quer que sejam publicadas automaticamente no twitter', 'sv-twitter'); ?></p> <?php //phpcs:ignore ?> 
+<p class="helper"><?php echo esc_html_e('Selecione as categorias que você *não* quer que sejam publicadas automaticamente no twitter', 'sv-twitter'); ?></p> <?php //phpcs:ignore ?> 
 <?php if (! empty($categories) ) { ?>
     <div class="categories">
         <ul>
@@ -22,7 +22,7 @@
         <li>
             <input type="checkbox" name="<?php echo esc_attr($args['name']); ?>[]" id="<?php echo esc_attr($args['name'] . '_' . $category->term_id); ?>" value="<?php echo esc_attr($category->term_id); ?>" <?php //phpcs:ignore ?>
             <?php checked(in_array($category->term_id, $checked), 1); ?> />
-            <label for="<?php echo esc_attr($args['name']) . $category->term_id; ?>"><?php printf(esc_html__('%s', 'sv-twitter'), esc_html($category->name)) ; ?></label> <?php //phpcs:ignore ?>
+            <label for="<?php echo esc_attr($args['name']) . esc_attr($category->term_id); ?>"><?php printf(esc_html__('%s', 'sv-twitter'), esc_html($category->name)) ; ?></label> <?php //phpcs:ignore ?>
         </li>
     <?php } ?>
         </ul>
