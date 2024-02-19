@@ -41,7 +41,7 @@
     <?php if (! empty($logs) ) { ?>
         <form method="post" action="">
             <input type="hidden" name="clear" id="clear" value="clear" />
-            <input type="hidden" name="clear_nonce" id="clear_nonce" value="<?php echo wp_create_nonce('clear_logs'); ?>" /> <?php //phpcs:ignore ?>
+            <input type="hidden" name="clear_nonce" id="clear_nonce" value="<?php echo esc_attr(wp_create_nonce('clear_logs')); ?>" /> <?php //phpcs:ignore ?>
             <button class="clear-logs button">
         <?php echo esc_html_e('Limpar Logs', 'sv-twitter'); ?>
             </button>
