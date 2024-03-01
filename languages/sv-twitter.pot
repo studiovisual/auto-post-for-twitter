@@ -11,7 +11,7 @@ msgstr ""
 "<translations@example."
 "com>\n"
 "POT-Creation-Date: "
-"2023-07-16 15:00-0300\n"
+"2024-03-01 13:06-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Your "
 "Name <you@example.com>\n"
@@ -51,106 +51,114 @@ msgstr ""
 "X-Poedit-"
 "SearchPath-0: .\n"
 
-#: app/Controllers/Autotwitter_Admin.php:60
-#: app/Controllers/Autotwitter_Admin.php:61
+#: app/Controllers/Autotwitter_Admin.php:88
+#: app/Controllers/Autotwitter_Admin.php:89
+#: views/settings.php:19
 msgid "Documentação"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:70
-#: app/Controllers/Autotwitter_Admin.php:71
+#: app/Controllers/Autotwitter_Admin.php:98
+#: app/Controllers/Autotwitter_Admin.php:99
 msgid "Logs"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:141
+#: app/Controllers/Autotwitter_Admin.php:173
 msgid "Ativar"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:153
-#: app/Controllers/Autotwitter_Admin.php:160
+#: app/Controllers/Autotwitter_Admin.php:185
+#: app/Controllers/Autotwitter_Admin.php:196
 msgid "Consumer Key"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:172
-#: app/Controllers/Autotwitter_Admin.php:179
+#: app/Controllers/Autotwitter_Admin.php:208
+#: app/Controllers/Autotwitter_Admin.php:219
 msgid "Consumer Secret"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:191
-#: app/Controllers/Autotwitter_Admin.php:198
+#: app/Controllers/Autotwitter_Admin.php:231
+#: app/Controllers/Autotwitter_Admin.php:242
 msgid "Token Key"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:210
-#: app/Controllers/Autotwitter_Admin.php:217
+#: app/Controllers/Autotwitter_Admin.php:254
+#: app/Controllers/Autotwitter_Admin.php:265
 msgid "Token Secret"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:232
+#: app/Controllers/Autotwitter_Admin.php:285
 msgid "Tipos de Post"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:247
+#: app/Controllers/Autotwitter_Admin.php:300
 msgid "Categorias"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:351
+#: app/Controllers/Autotwitter_Admin.php:416
+#, php-format
 msgid ""
 "Você precisa preencher o "
-"campo "
+"campo %s"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Admin.php:386
+#: app/Controllers/Autotwitter_Admin.php:451
+#: views/logs.php:25
 msgid ""
 "Suas opções foram salvas."
 msgstr ""
 
-#: app/Controllers/Autotwitter_Publish.php:139
+#: app/Controllers/Autotwitter_Admin.php:467
+msgid ""
+"Seus logs foram "
+"excluídos."
+msgstr ""
+
+#: app/Controllers/Autotwitter_ApiTwitter.php:72
+#: app/Controllers/Autotwitter_Publish.php:147
+#: app/Controllers/Autotwitter_Publish.php:188
+#: app/Controllers/Autotwitter_Publish.php:199
+msgid "falhou"
+msgstr ""
+
+#: app/Controllers/Autotwitter_Publish.php:134
+msgid "sucesso"
+msgstr ""
+
+#: app/Controllers/Autotwitter_Publish.php:186
 msgid ""
 "Não enviado por estar em "
 "categoria bloqueada | "
 "Categoria(s):"
 msgstr ""
 
-#: app/Controllers/Autotwitter_Publish.php:150
+#: app/Controllers/Autotwitter_Publish.php:197
 msgid ""
 "Não enviado por estar em "
 "tipo de post bloqueado | "
 "Tipo de post:"
 msgstr ""
 
-#: views/docs.php:2
+#: views/docs.php:20
 msgid ""
 "Como obter acesso à API "
 "do Twitter"
 msgstr ""
 
-#: views/docs.php:4
+#: views/docs.php:22
 msgid ""
 "Passo 1: Cadastre-se "
 "para obter uma conta de "
 "desenvolvedor"
 msgstr ""
 
-#: views/docs.php:5
+#: views/docs.php:24
 msgid ""
 "O cadastro para uma "
 "conta de desenvolvedor é "
-"rápido e fácil! Basta <a "
-"href=\"https://developer."
-"twitter.com/en/portal/"
-"products/basic\" "
-"target=\"_blank\">clicar "
-"aqui</a> para acessar o "
-"formulário de cadastro e "
-"responder algumas "
-"perguntas. <br />Assim, "
-"você poderá começar a "
-"explorar e construir na "
-"API do Twitter v2 usando "
-"acesso básico."
+"rápido e fácil!"
 msgstr ""
 
-#: views/docs.php:7
+#: views/docs.php:28
 msgid ""
 "Passo 2: Salve a chave e "
 "os tokens do seu "
@@ -158,7 +166,7 @@ msgid ""
 "seguros"
 msgstr ""
 
-#: views/docs.php:8
+#: views/docs.php:29
 msgid ""
 "Assim que você tiver "
 "acesso e tiver criado um "
@@ -170,10 +178,9 @@ msgid ""
 "desenvolvedor:"
 msgstr ""
 
-#: views/docs.php:11
+#: views/docs.php:32
 msgid ""
-"<strong>API Key e Secret:"
-"</strong> "
+"API Key e Secret: "
 "Essencialmente, o nome "
 "de usuário e a senha do "
 "seu aplicativo. Você "
@@ -188,29 +195,198 @@ msgid ""
 "aplicativo."
 msgstr ""
 
-#: views/metabox/post.php:3
+#: views/docs.php:33
+msgid ""
+"Access Token e Secret: "
+"Em geral, os Access "
+"Tokens representam o "
+"usuário em nome do qual "
+"você está fazendo a "
+"solicitação. Os tokens "
+"que você pode gerar por "
+"meio do portal de "
+"desenvolvedores "
+"representam o usuário "
+"que é proprietário do "
+"aplicativo. Você usará "
+"esses dados para "
+"autenticar solicitações "
+"que exigem o Contexto do "
+"Usuário OAuth 1.0a. Se "
+"você deseja fazer "
+"solicitações em nome de "
+"outro usuário, precisará "
+"usar o fluxo de "
+"autenticação de 3 etapas "
+"do OAuth para que eles "
+"autorizem você."
+msgstr ""
+
+#: views/docs.php:34
+msgid ""
+"Client ID e Client "
+"Secret: Essas "
+"credenciais são usadas "
+"para obter um Access "
+"Token do usuário com "
+"autenticação OAuth 2.0. "
+"Semelhante ao OAuth "
+"1.0a, os Access Tokens "
+"do usuário são usados "
+"para autenticar "
+"solicitações que "
+"fornecem informações "
+"privadas da conta do "
+"usuário ou executam "
+"ações em nome de outra "
+"conta, mas com escopo "
+"detalhado para um "
+"controle maior sobre o "
+"acesso que o aplicativo "
+"do cliente tem ao "
+"usuário."
+msgstr ""
+
+#: views/docs.php:35
+msgid ""
+"App only Access Token: "
+"Você usará esse token ao "
+"fazer solicitações para "
+"pontos de extremidade "
+"que respondem com "
+"informações disponíveis "
+"publicamente no Twitter."
+msgstr ""
+
+#: views/docs.php:38
+msgid ""
+"Já que essas chaves e "
+"tokens não expiram, a "
+"menos que sejam "
+"regenerados, sugerimos "
+"que você os salve em um "
+"local seguro, como um "
+"gerenciador de senhas, "
+"assim que receber suas "
+"credenciais."
+msgstr ""
+
+#: views/docs.php:40
+msgid ""
+"Passo 3: Copiar as sua "
+"chaves geradas"
+msgstr ""
+
+#: views/docs.php:43
+msgid ""
+"Agora basta inserir suas "
+"chaves nos campos "
+"correspondentes na "
+msgstr ""
+
+#: views/docs.php:44
+msgid "Configurações"
+msgstr ""
+
+#: views/docs.php:44
+msgid ""
+"configuração do plugin"
+msgstr ""
+
+#: views/docs.php:45
+msgid ""
+"e fazer suas "
+"customizações."
+msgstr ""
+
+#: views/logs.php:18
+#: views/logs.php:74
+#: views/logs.php:78
+#: views/logs.php:81
+#: views/logs.php:84
+#: views/options/Taxonomies.php:25
+#: views/options/postTypes.php:27
+#, php-format
+msgid "%s"
+msgstr ""
+
+#: views/logs.php:35
+msgid ""
+"Aqui você pode "
+"acompanhar os logs das "
+"publicações"
+msgstr ""
+
+#: views/logs.php:46
+msgid "Limpar Logs"
+msgstr ""
+
+#: views/logs.php:56
+#: views/logs.php:92
+msgid "Post ID"
+msgstr ""
+
+#: views/logs.php:59
+#: views/logs.php:95
+msgid "Status"
+msgstr ""
+
+#: views/logs.php:62
+#: views/logs.php:98
+msgid "Data"
+msgstr ""
+
+#: views/logs.php:65
+#: views/logs.php:101
+msgid "Detalhes"
+msgstr ""
+
+#: views/logs.php:107
+msgid ""
+"Nenhum log encontrado"
+msgstr ""
+
+#: views/metabox/post.php:18
 msgid ""
 "Publicar no Twitter?"
 msgstr ""
 
-#: views/metabox/post.php:11
+#: views/metabox/post.php:20
+msgid "Sim"
+msgstr ""
+
+#: views/metabox/post.php:21
+msgid "Não"
+msgstr ""
+
+#: views/metabox/post.php:26
 msgid "Título alternativo"
 msgstr ""
 
-#: views/options/Taxonomies.php:1
+#: views/options/Taxonomies.php:17
 msgid ""
 "Selecione as categorias "
-"que você <strong>não</"
-"strong> quer que sejam "
-"publicadas "
+"que você *não* quer que "
+"sejam publicadas "
 "automaticamente no "
 "twitter"
 msgstr ""
 
-#: views/options/postTypes.php:1
+#: views/options/postTypes.php:17
 msgid ""
 "Escolha os post types "
 "que deverão ser "
-"<strong>inclusos</"
-"strong>:"
+"*inclusos*:"
+msgstr ""
+
+#: views/settings.php:19
+msgid ""
+"Caso não saiba como "
+"conseguir as suas chaves "
+"de Api, acesse a "
+"documentação"
+msgstr ""
+
+#: views/settings.php:19
+msgid "clicando aqui"
 msgstr ""
