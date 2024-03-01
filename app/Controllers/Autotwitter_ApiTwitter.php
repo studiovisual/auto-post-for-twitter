@@ -49,9 +49,9 @@ class Autotwitter_ApiTwitter
      * @param int    $post_id post_id
      * @param string $message message
      *
-     * @return bool|array
+     * @return boolean|array
      */
-    public function autotwitter_createTweet(int $post_id, string $message) : bool|array { //phpcs:ignore
+    public function autotwitter_createTweet(int $post_id, string $message) { //phpcs:ignore
         $url    = 'https://api.twitter.com/2/tweets';
         $method = 'POST';
 

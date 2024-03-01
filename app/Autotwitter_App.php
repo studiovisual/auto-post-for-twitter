@@ -51,8 +51,6 @@ class Autotwitter_App
      * @return void
      */
     public static function autotwitter_activate(): void { //phpcs:ignore
-        update_option('rewrite_rules', '');
-
         // Create Table Logs
         $logs = new Autotwitter_Logs();
         $logs->autotwitter_createTable();

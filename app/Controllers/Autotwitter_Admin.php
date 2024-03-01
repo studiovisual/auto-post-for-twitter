@@ -63,8 +63,8 @@ class Autotwitter_Admin
      * @return void
      */
     function autotwitter_enqueueAssets() { //phpcs:ignore
-        wp_enqueue_style('starter-plugin-style', STUDIO_TWITTER_PLUGIN_URL . '/../assets/css/style.css', false, null); //phpcs:ignore
-        wp_enqueue_script('starter-plugin-script', STUDIO_TWITTER_PLUGIN_URL . '/assets/js/script.js', array('jquery')); //phpcs:ignore
+        wp_enqueue_style('starter-plugin-style', AUTOTWITTER_PLUGIN_URL . '/../assets/css/style.css', false, null); //phpcs:ignore
+        wp_enqueue_script('starter-plugin-script', AUTOTWITTER_PLUGIN_URL . '/assets/js/script.js', array('jquery')); //phpcs:ignore
     }
 
     /**
@@ -115,7 +115,7 @@ class Autotwitter_Admin
         $slug       = Autotwitter_App::autotwitter_getSlug();
         $docs       = Autotwitter_App::autotwitter_getKey('docs_');
 
-        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/settings.php';
+        include_once AUTOTWITTER_PLUGIN_DIR . 'views/settings.php';
     }
 
     /**
@@ -125,7 +125,7 @@ class Autotwitter_Admin
      */
     public function autotwitter_docs(): void { //phpcs:ignore
         $settingsPage = Autotwitter_App::autotwitter_getKey();
-        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/docs.php';
+        include_once AUTOTWITTER_PLUGIN_DIR . 'views/docs.php';
     }
 
     /**
@@ -144,7 +144,7 @@ class Autotwitter_Admin
         $logs    = $this->logs->autotwitter_get();
         $current = Autotwitter_App::autotwitter_getKey('logs_');
 
-        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/logs.php';
+        include_once AUTOTWITTER_PLUGIN_DIR . 'views/logs.php';
     }
 
     /**
@@ -320,7 +320,7 @@ class Autotwitter_Admin
         $postTypes = $this->autotwitter_getPostTypes();
         $checked   = ! empty($checked = get_option($args['name'])) ? $checked : array(); //phpcs:ignore
 
-        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/options/postTypes.php';
+        include_once AUTOTWITTER_PLUGIN_DIR . 'views/options/postTypes.php';
     }
 
     /**
@@ -334,7 +334,7 @@ class Autotwitter_Admin
         $categories = get_categories(array( 'hide_empty' => false ));
         $checked    = ! empty($checked = get_option($args['name'])) ? $checked : array(); //phpcs:ignore
 
-        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/options/Taxonomies.php';
+        include_once AUTOTWITTER_PLUGIN_DIR . 'views/options/Taxonomies.php';
     }
 
     /**
@@ -413,7 +413,7 @@ class Autotwitter_Admin
             add_settings_error(
                 Autotwitter_App::autotwitter_getSlug('errors'),
                 'could-not-be-empty',
-                sprintf(esc_html__('You need to fill the field %s', 'sv-twitter'), esc_html($field_name)),
+                sprintf(esc_html__('Você precisa preencher o campo %s', 'sv-twitter'), esc_html($field_name)),
                 'error'
             );
 
@@ -515,7 +515,7 @@ class Autotwitter_Admin
         // Title settings
         $title = get_post_meta($post->ID, $slug . '_title', true);
 
-        include_once STUDIO_TWITTER_PLUGIN_DIR . 'views/metabox/post.php';
+        include_once AUTOTWITTER_PLUGIN_DIR . 'views/metabox/post.php';
     }
 
     /**
