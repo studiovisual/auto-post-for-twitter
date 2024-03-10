@@ -1,7 +1,7 @@
 {
-    "name": "studiovisual/studio-csp",
+    "name": "studiovisual/auto-post-for-twitter",
     "type": "wordpress-plugin",
-    "description": "Studio Visual - Plugin CSP",
+    "description": "Automatically post on Twitter when publishing a new post on WordPress",
     "homepage": "https://studiovisual.com.br",
     "authors": [
         {
@@ -9,6 +9,18 @@
           "email": "atendimento@studiovisual.com.br",
           "homepage": "https://github.com/studiovisual/",
           "role": "Company"
+        },
+        {
+          "name": "Richard Itokazo",
+          "email": "ritokazo@studiovisual.com.br",
+          "homepage": "https://github.com/richarditokazo",
+          "role": "Developer"
+        },
+        {
+          "name": "Tiago Papile",
+          "email": "tpapile@studiovisual.com.br",
+          "homepage": "https://github.com/tiagopapile",
+          "role": "Developer"
         }
     ],
     "autoload": {
