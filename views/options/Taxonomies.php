@@ -12,9 +12,9 @@
  */
 
  if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
- 
+
 ?>
-<p class="helper"><?php echo esc_html_e('Selecione as categorias que você *não* quer que sejam publicadas automaticamente no twitter', 'sv-twitter'); ?></p> <?php //phpcs:ignore ?> 
+<p class="helper"><?php echo esc_html_e('Select the categories you *don\'t* want to be automatically published on Twitter', 'sv-twitter'); ?></p> <?php //phpcs:ignore ?>
 <?php if (! empty($categories) ) { ?>
     <div class="categories">
         <ul>

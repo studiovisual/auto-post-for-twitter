@@ -131,7 +131,7 @@ class Autotwitter_Publish
 
                 if ($publish['code'] === 201 || $publish['code'] === 200 ) {
                     // Success
-                    $this->logs->autotwitter_add($post->ID, __('sucesso', 'sv-twitter'), $log); //phpcs:ignore
+                    $this->logs->autotwitter_add($post->ID, __('success', 'sv-twitter'), $log); //phpcs:ignore
 
                     // update meta field to not publish on twitter again
                     update_post_meta($post->ID, 'twitter_published', true);
@@ -144,7 +144,7 @@ class Autotwitter_Publish
                 }
 
                 // Log error on API
-                $this->logs->autotwitter_add($post->ID, __('falhou', 'sv-twitter'), $log); //phpcs:ignore
+                $this->logs->autotwitter_add($post->ID, __('failed', 'sv-twitter'), $log); //phpcs:ignore
             }
         }
     }
@@ -183,9 +183,9 @@ class Autotwitter_Publish
                 $cats[] = get_the_category_by_ID($cat);
             }
 
-            $message = __('Não enviado por estar em categoria bloqueada | Categoria(s):', 'sv-twitter'); //phpcs:ignore
+            $message = __('Not sent cause it\'s in a blocked category | Categories:', 'sv-twitter'); //phpcs:ignore
             $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . implode(", ", $cats); //phpcs:ignore
-            $this->logs->autotwitter_add($post_id, __('falhou', 'sv-twitter'), $log);
+            $this->logs->autotwitter_add($post_id, __('failed', 'sv-twitter'), $log);
             return false;
         }
 
@@ -194,9 +194,9 @@ class Autotwitter_Publish
 
         // Checks if post type not in settings
         if (! in_array($post_type, $settingsPostTypes) ) {
-            $message = __('Não enviado por estar em tipo de post bloqueado | Tipo de post:', 'sv-twitter'); //phpcs:ignore
+            $message = __('Not sent cause it\'s in a blocked post Type | Post Type:', 'sv-twitter'); //phpcs:ignore
             $log = '[' . $post_id . '] ' . get_the_title($post_id) . ' | ' . $message . ' ' . $post_type; //phpcs:ignore
-            $this->logs->autotwitter_add($post_id, __('falhou', 'sv-twitter'), $log);
+            $this->logs->autotwitter_add($post_id, __('failed', 'sv-twitter'), $log);
             return false;
         }
 

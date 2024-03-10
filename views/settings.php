@@ -16,7 +16,7 @@
 ?>
 <div class="wrap sv-plugin">
     <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-    <p><?php echo esc_html_e('Caso não saiba como conseguir as suas chaves de Api, acesse a documentação', 'sv-twitter'); ?> <a href="<?php echo esc_url(admin_url('admin.php?page=' . $docs)); ?>" title="<?php echo esc_html_e('Documentação', 'sv-twitter'); ?>"><?php echo esc_html_e('clicando aqui', 'sv-twitter'); ?></a>.</p> <?php //phpcs:ignore ?>
+    <p><?php echo esc_html_e('If you don\'t know how to get your API keys, go to the documentation', 'sv-twitter'); ?> <a href="<?php echo esc_url(admin_url('admin.php?page=' . $docs)); ?>" title="<?php echo esc_html_e('Documentation', 'sv-twitter'); ?>"><?php echo esc_html_e('clicking here', 'sv-twitter'); ?></a>.</p> <?php //phpcs:ignore ?>
     <form method="post" action="options.php">
         <?php
         settings_errors($validation);

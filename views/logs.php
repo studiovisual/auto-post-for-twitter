@@ -22,7 +22,7 @@
             <p>
                 <strong>
         <?php
-        echo esc_html_e('Suas opções foram salvas.', 'sv-twitter');
+        echo esc_html_e('Your options have been saved.', 'sv-twitter');
         ?>
                 </strong>
             </p>
@@ -32,7 +32,7 @@
     <p>
         <?php
         echo esc_html_e(
-            'Aqui você pode acompanhar os logs das publicações',
+            'Here you can follow the publications logs',
             'sv-twitter'
         );
         ?>
@@ -43,7 +43,7 @@
             <input type="hidden" name="clear" id="clear" value="clear" />
             <input type="hidden" name="clear_nonce" id="clear_nonce" value="<?php echo esc_attr(wp_create_nonce('clear_logs')); ?>" /> <?php //phpcs:ignore ?>
             <button class="clear-logs button">
-        <?php echo esc_html_e('Limpar Logs', 'sv-twitter'); ?>
+        <?php echo esc_html_e('Clear logs', 'sv-twitter'); ?>
             </button>
         </form>
     <?php } ?>
@@ -59,10 +59,10 @@
         <?php echo esc_html_e('Status', 'sv-twitter'); ?>
                     </th>
                     <th scope="col" class="manage-column column-date">
-        <?php echo esc_html_e('Data', 'sv-twitter'); ?>
+        <?php echo esc_html_e('Date', 'sv-twitter'); ?>
                     </th>
                     <th scope="col" class="manage-column column-detalhes">
-        <?php echo esc_html_e('Detalhes', 'sv-twitter'); ?>
+        <?php echo esc_html_e('Details', 'sv-twitter'); ?>
                     </th>
                 </tr>
             </thead>
@@ -95,15 +95,15 @@
         <?php echo esc_html_e('Status', 'sv-twitter'); ?>
                     </th>
                     <th scope="col" class="manage-column column-date">
-        <?php echo esc_html_e('Data', 'sv-twitter'); ?>
+        <?php echo esc_html_e('Date', 'sv-twitter'); ?>
                     </th>
                     <th scope="col" class="manage-column column-detalhes">
-        <?php echo esc_html_e('Detalhes', 'sv-twitter'); ?>
+        <?php echo esc_html_e('Details', 'sv-twitter'); ?>
                     </th>
                 </tr>
             </tfoot>
         </table>
     <?php } else { ?>
-        <p><?php echo esc_html_e('Nenhum log encontrado', 'sv-twitter'); ?></p>
+        <p><?php echo esc_html_e('Log\'s not found', 'sv-twitter'); ?></p>
     <?php } ?>
 </div>
