@@ -15,7 +15,7 @@
 Plugin Name:  Auto Post for Twitter
 Plugin URI:   https://github.com/studiovisual/auto-post-for-twitter
 Description:  Automatically post on Twitter when publishing a new post on WordPress.
-Version:      1.0.0
+Version:      1.0.1
 Author:       Studio visual
 Author URI:   https://www.studiovisual.com.br/
 License: GPL2
