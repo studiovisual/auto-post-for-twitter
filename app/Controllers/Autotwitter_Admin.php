@@ -85,8 +85,8 @@ class Autotwitter_Admin
 
         add_submenu_page(
             Autotwitter_App::autotwitter_getKey(),
-            __('Documentação', 'sv-twitter'),
-            __('Documentação', 'sv-twitter'),
+            __('Documentation', 'sv-twitter'),
+            __('Documentation', 'sv-twitter'),
             'manage_options',
             Autotwitter_App::autotwitter_getKey('docs_'),
             array( $this, 'autotwitter_docs' ),
@@ -170,7 +170,7 @@ class Autotwitter_Admin
         register_setting($group, Autotwitter_App::autotwitter_getSlug('isActive'));
         add_settings_field(
             Autotwitter_App::autotwitter_getSlug('isActive'),
-            __('Ativar', 'sv-twitter'),
+            __('Activate', 'sv-twitter'),
             array( $this, 'autotwitter_fieldBoolean' ),
             $slug,
             Autotwitter_App::autotwitter_getSlug('section_id'),
@@ -282,7 +282,7 @@ class Autotwitter_Admin
 
         add_settings_field(
             Autotwitter_App::autotwitter_getSlug('postTypes'),
-            __('Tipos de Post', 'sv-twitter'),
+            __('Post types', 'sv-twitter'),
             array( $this, 'autotwitter_fieldPostType' ),
             $slug,
             Autotwitter_App::autotwitter_getSlug('section_id'),
@@ -297,7 +297,7 @@ class Autotwitter_Admin
         register_setting($group, Autotwitter_App::autotwitter_getSlug('Categories'));
         add_settings_field(
             Autotwitter_App::autotwitter_getSlug('Categories'),
-            __('Categorias', 'sv-twitter'),
+            __('Categories', 'sv-twitter'),
             array( $this, 'autotwitter_fieldTaxonomy' ),
             $slug,
             Autotwitter_App::autotwitter_getSlug('section_id'),
@@ -413,7 +413,7 @@ class Autotwitter_Admin
             add_settings_error(
                 Autotwitter_App::autotwitter_getSlug('errors'),
                 'could-not-be-empty',
-                sprintf(esc_html__('Você precisa preencher o campo %s', 'sv-twitter'), esc_html($field_name)),
+                sprintf(esc_html__('You need to fill the field %s', 'sv-twitter'), esc_html($field_name)),
                 'error'
             );
 
@@ -433,7 +433,7 @@ class Autotwitter_Admin
      */
     public function autotwitter_notices(): void { //phpcs:ignore
 
-        $checkErrors = get_settings_errors(Autotwitter_App::autotwitter_getSlug('errors')); //phpcs:ignore	
+        $checkErrors = get_settings_errors(Autotwitter_App::autotwitter_getSlug('errors')); //phpcs:ignore
 
         // If found any error skip success
         if (! empty($checkErrors) ) {
@@ -448,7 +448,7 @@ class Autotwitter_Admin
             ?>
                 <div class="notice notice-success is-dismissible">
                     <p>
-                        <strong><?php echo esc_html_e('Suas opções foram salvas.', 'sv-twitter'); ?></strong> <?php //phpcs:ignore ?>
+                        <strong><?php echo esc_html_e('Your options have been saved.', 'sv-twitter'); ?></strong> <?php //phpcs:ignore ?>
                     </p>
                 </div>
             <?php
@@ -464,7 +464,7 @@ class Autotwitter_Admin
             ?>
                 <div class="notice notice-success is-dismissible">
                     <p>
-                        <strong><?php echo esc_html_e('Seus logs foram excluídos.', 'sv-twitter'); ?></strong> <?php //phpcs:ignore ?>
+                        <strong><?php echo esc_html_e('Your logs have been deleted.', 'sv-twitter'); ?></strong> <?php //phpcs:ignore ?>
                     </p>
                 </div>
             <?php

@@ -14,7 +14,7 @@
  if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 ?>
 <p class="helper">
-    <?php echo esc_html_e('Escolha os post types que deverão ser *inclusos*:', 'sv-twitter'); //phpcs:ignore ?>
+    <?php echo esc_html_e('Choose the post types that should be *included*:', 'sv-twitter'); //phpcs:ignore ?>
 </p>
 <?php if (! empty($postTypes) ) { ?>
     <div class="categories">
